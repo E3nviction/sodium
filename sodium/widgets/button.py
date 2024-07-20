@@ -252,7 +252,8 @@ class Button:
         """
         if self.is_active() and not self.is_locked():
             self.locked = True
-            self.onclickfunc[0](*self.onclickfunc[1])
+            if self.onclickfunc:
+                self.onclickfunc[0](*self.onclickfunc[1])
         if not self.is_active():
             self.locked = False
 
