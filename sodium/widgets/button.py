@@ -292,19 +292,25 @@ class Button:
         """
         Draws the button
         """
+        disabled_color = self.disabled_color
         surface = self.surface
+        label_x = self.label_x
+        label_y = self.label_y
+        text = self.text
+        rect = self.rect
+        font = self.font
         if self.is_active():
             pygame.draw.rect(surface, self.active_background, self.rect)
-            Label(surface, self.text, self.rect, self.active_color, self.font, pos_x=self.label_x, pos_y=self.label_y).draw()
+            Label(surface, text, rect, self.active_color, font, pos_x=label_x, pos_y=label_y).draw()
         elif self.is_touching_mouse():
             pygame.draw.rect(surface, self.hover_background, self.rect)
-            Label(surface, self.text, self.rect, self.hover_color, self.font, pos_x=self.label_x, pos_y=self.label_y).draw()
+            Label(surface, text, rect, self.hover_color, font, pos_x=label_x, pos_y=label_y).draw()
         elif self.disabled:
             pygame.draw.rect(surface, self.disabled_background, self.rect)
-            Label(surface, self.text, self.rect, self.disabled_color, self.font, pos_x=self.label_x, pos_y=self.label_y).draw()
+            Label(surface, text, rect, disabled_color, font, pos_x=label_x, pos_y=label_y).draw()
         else:
             pygame.draw.rect(surface, self.background, self.rect)
-            Label(surface, self.text, self.rect, self.color, self.font, pos_x=self.label_x, pos_y=self.label_y).draw()
+            Label(surface, text, rect, self.color, font, pos_x=label_x, pos_y=label_y).draw()
 
     def update(self):
         """
