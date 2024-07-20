@@ -40,3 +40,6 @@ sodium.start(win, main)
 
 ## License
 This project is licensed under the MIT license.
+which means that you can use this project in any way you want.
+Fork it, modify it, or redistribute it as you wish.
+For more information, visit [https://github.com/E3nviction/sodium/blob/main/LICENSE](https://github.com/E3nviction/sodium/blob/main/LICENSE)
