@@ -15,6 +15,8 @@ warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*avx2.*")
 import pygame
 sys.stdout = sys.__stdout__
 
+__version__ = "0.0.3"
+
 from .settings import *
 from .window import *
 from .common import *
@@ -23,6 +25,7 @@ from .builtins import *
 from .event import *
 from .theme import *
 from .mainloop import *
+from .require import *
 
 __all__ = [
     "settings",
@@ -36,8 +39,8 @@ __all__ = [
     "mainloop",
     "init",
     "quit_window",
+    "require",
 ]
-__version__ = "0.0.2"
 
 if friendly_messages:
     print("SodiumUI v" + __version__)
