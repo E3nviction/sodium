@@ -29,6 +29,7 @@ def mainloop(win, main, auto=False):
                     running = False
             win.fill(theme.theme_colors["BACKGROUND"])
             main()
+            Window.flip(win)
             Window.update(win)
 
     sodium.quit_window()

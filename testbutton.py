@@ -2,15 +2,14 @@ import sodium
 from sodium import Window
 
 sodium.init()
-win = Window(640, 480, "Test").get_screen()
+window = Window(640, 480)
+win = window.get_screen()
 
-def button_press():
-    print("Button pressed!")
-
-
-button = sodium.Button(win, "Btn1", (50, 50, 150, 50))
-button.set_on_click(button_press)
+label = sodium.Label(win, "Hello, World!")
 
 def main():
-    button.update()
+    width = window.get_width()
+    height = window.get_height()
+    label.set_rect((50, 50, window.get_width() - 100, window.get_height() - 100))
+    label.update()
 sodium.start(win, main)

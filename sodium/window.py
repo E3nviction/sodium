@@ -48,6 +48,12 @@ class Window:
         """
         pygame.display.update()
 
+    def flip(self):
+        """
+        Flips the window
+        """
+        pygame.display.flip()
+
     def fill(self, color):
         """
         Fills the window

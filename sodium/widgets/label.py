@@ -16,8 +16,8 @@ class Label:
         font=None,
         font_family=None,
         font_size=20,
-        pos_x=True,
-        pos_y=True
+        pos_x="center",
+        pos_y="center",
         ):
         """
         Initializes the label
@@ -53,23 +53,25 @@ class Label:
         if self.font is None:
             self.font = common.set_font(self.font_family, self.font_size)
 
+        new_rect = [0, 0, 0, 0]
+
         if self.pos_x == "center":
-            self.rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.text)[0] / 2
+            new_rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.text)[0] / 2
         elif self.pos_x == "right":
-            self.rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
+            new_rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
         elif self.pos_x == "left":
             pass
         else:
             raise ValueError(f"pos_x must be 'left', 'right', or 'center' and not '{self.pos_x}'")
         if self.pos_y == "center":
-            self.rect[1] = self.rect.h / 2 + self.rect.y - self.font.get_height() / 2
+            new_rect[1] = self.rect.h / 2 + self.rect.y - self.font.get_height() / 2
         elif self.pos_y == "bottom":
-            self.rect[1] = self.rect.h + self.rect.y - self.font.get_height()
+            new_rect[1] = self.rect.h + self.rect.y - self.font.get_height()
         elif self.pos_y == "top":
             pass
         else:
             raise ValueError(f"pos_y must be 'top', 'bottom', or 'center' and not '{self.pos_y}'")
-        self.surface.blit(self.font.render(self.text, True, self.color), self.rect)
+        self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
 
     def set_text(self, text):
         """
@@ -125,7 +127,39 @@ class Label:
 
         :param rect: Rect
         """
-        self.rect = rect
+        self.rect = constants.Rect(rect)
+
+    def set_x(self, x):
+        """
+        Sets the label's x
+
+        :param x: int
+        """
+        self.rect.x = x
+
+    def set_y(self, y):
+        """
+        Sets the label's y
+
+        :param y: int
+        """
+        self.rect.y = y
+
+    def set_width(self, width):
+        """
+        Sets the label's width
+
+        :param width: int
+        """
+        self.rect.w = width
+
+    def set_height(self, height):
+        """
+        Sets the label's height
+
+        :param height: int
+        """
+        self.rect.h = height
 
     def set_color(self, color):
         """
