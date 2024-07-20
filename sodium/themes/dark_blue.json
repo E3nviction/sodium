@@ -1,0 +1,16 @@
+{
+  "BACKGROUND": [30, 30, 30],
+  "BACKGROUND_DISABLED": [20, 20, 20],
+  "FOREGROUND": [250, 250, 250],
+  "FOREGROUND_DISABLED": [200, 200, 200],
+
+  "ACCENT": [0, 146, 246],
+  "ACCENT_HOVER": [0, 126, 226],
+  "ACCENT_ACTIVE": [0, 166, 255],
+  "ACCENT_DISABLED": [20, 100, 200],
+
+
+
+  "FONT": "sodium/fonts/Roboto-Regular.ttf",
+  "FONT_SIZE": 20
+}
