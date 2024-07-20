@@ -13,7 +13,9 @@ dependencies:
  - pygame-ce
 
 To install Sodium, move the sodium folder into your project folder and import it in your project:
-```import sodium```
+```python
+import sodium
+```
 
 ## Docs
 ### Getting Started
