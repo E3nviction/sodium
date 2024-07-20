@@ -16,8 +16,8 @@ class Label:
         font=None,
         font_family=None,
         font_size=20,
-        center_x=False,
-        center_y=False
+        pos_x=True,
+        pos_y=True
         ):
         """
         Initializes the label
@@ -29,8 +29,8 @@ class Label:
         :param font: Font
         :param font_family: str
         :param font_size: int
-        :param center_x: bool
-        :param center_y: bool
+        :param pos_x: bool
+        :param pos_y: bool
         """
         super().__init__()
         self.surface = surface
@@ -40,8 +40,8 @@ class Label:
         self.font = font
         self.font_family = font_family
         self.font_size = font_size
-        self.center_x = center_x
-        self.center_y = center_y
+        self.pos_x = pos_x
+        self.pos_y = pos_y
 
         if font is None:
             self.font = common.set_font(font_family, font_size)
@@ -53,10 +53,22 @@ class Label:
         if self.font is None:
             self.font = common.set_font(self.font_family, self.font_size)
 
-        if self.center_x:
-            self.rect.centerx = self.surface.get_width() // 2
-        if self.center_y:
-            self.rect.centery = self.surface.get_height() // 2
+        if self.pos_x == "center":
+            self.rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.text)[0] / 2
+        elif self.pos_x == "right":
+            self.rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
+        elif self.pos_x == "left":
+            pass
+        else:
+            raise ValueError(f"pos_x must be 'left', 'right', or 'center' and not '{self.pos_x}'")
+        if self.pos_y == "center":
+            self.rect[1] = self.rect.h / 2 + self.rect.y - self.font.get_height() / 2
+        elif self.pos_y == "bottom":
+            self.rect[1] = self.rect.h + self.rect.y - self.font.get_height()
+        elif self.pos_y == "top":
+            pass
+        else:
+            raise ValueError(f"pos_y must be 'top', 'bottom', or 'center' and not '{self.pos_y}'")
         self.surface.blit(self.font.render(self.text, True, self.color), self.rect)
 
     def set_text(self, text):
@@ -89,7 +101,7 @@ class Label:
 
         :return: tuple
         """
-        return self.font_family.size(self.text)
+        return self.font.size(self.text)
 
     def get_width(self):
         """
@@ -155,47 +167,47 @@ class Label:
         """
         return self.font_size
 
-    def get_center_x(self):
+    def get_pos_x(self):
         """
-        Gets the label's center x
+        Gets the label's pos x
 
         :return: bool
         """
-        return self.center_x
+        return self.pos_x
 
-    def get_center_y(self):
+    def get_pos_y(self):
         """
-        Gets the label's center y
+        Gets the label's pos y
 
         :return: bool
         """
-        return self.center_y
+        return self.pos_y
 
-    def set_center_x(self, center_x):
+    def set_pos_x(self, pos_x):
         """
-        Sets the label's center x
+        Sets the label's pos x
 
-        :param center_x: bool
+        :param pos_x: bool
         """
-        self.center_x = center_x
+        self.pos_x = pos_x
 
-    def set_center_y(self, center_y):
+    def set_pos_y(self, pos_y):
         """
-        Sets the label's center y
+        Sets the label's pos y
 
-        :param center_y: bool
+        :param pos_y: bool
         """
-        self.center_y = center_y
+        self.pos_y = pos_y
 
-    def set_center(self, center_x, center_y):
+    def set_pos(self, pos_x, pos_y):
         """
-        Sets the label's center
+        Sets the label's pos
 
-        :param center_x: bool
-        :param center_y: bool
+        :param pos_x: bool
+        :param pos_y: bool
         """
-        self.set_center_x(center_x)
-        self.set_center_y(center_y)
+        self.set_pos_x(pos_x)
+        self.set_pos_y(pos_y)
 
     def update(self):
         """
