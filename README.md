@@ -27,6 +27,7 @@ For more information, visit [https://github.com/E3nviction/sodium/blob/main/LICE
 # Docs
 ## Getting Started
 ### Create a window
+To create a window, use the `Window` class.
 ```python
 import sodium # import sodium
 from sodium import Window # import the Window class
@@ -40,6 +41,7 @@ def main(): # define the main function
     pass 
 sodium.start(win, main) # start sodium mainloop
 ```
+this will create a window with width 640 and height 480.
 ### Hello World
 To get started with Sodium, create a new file named `main.py` and copy the code below into it.
 ```python
