@@ -16,8 +16,8 @@ class Label:
         font=None,
         font_family=None,
         font_size=20,
-        pos_x="center",
-        pos_y="center",
+        align_x="center",
+        align_y="center",
         ):
         """
         Initializes the label
@@ -29,8 +29,8 @@ class Label:
         :param font: Font
         :param font_family: str
         :param font_size: int
-        :param pos_x: bool
-        :param pos_y: bool
+        :param align_x: bool
+        :param align_y: bool
         """
         super().__init__()
         self.surface = surface
@@ -40,8 +40,8 @@ class Label:
         self.font = font
         self.font_family = font_family
         self.font_size = font_size
-        self.pos_x = pos_x
-        self.pos_y = pos_y
+        self.align_x = align_x
+        self.align_y = align_y
 
         if font is None:
             self.font = common.set_font(font_family, font_size)
@@ -55,22 +55,22 @@ class Label:
 
         new_rect = [0, 0, 0, 0]
 
-        if self.pos_x == "center":
+        if self.align_x == "center":
             new_rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.text)[0] / 2
-        elif self.pos_x == "right":
+        elif self.align_x == "right":
             new_rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
-        elif self.pos_x == "left":
+        elif self.align_x == "left":
             pass
         else:
-            raise ValueError(f"pos_x must be 'left', 'right', or 'center' and not '{self.pos_x}'")
-        if self.pos_y == "center":
+            raise ValueError(f"align_x must be 'left', 'right', or 'center' and not '{self.align_x}'")
+        if self.align_y == "center":
             new_rect[1] = self.rect.h / 2 + self.rect.y - self.font.get_height() / 2
-        elif self.pos_y == "bottom":
+        elif self.align_y == "bottom":
             new_rect[1] = self.rect.h + self.rect.y - self.font.get_height()
-        elif self.pos_y == "top":
+        elif self.align_y == "top":
             pass
         else:
-            raise ValueError(f"pos_y must be 'top', 'bottom', or 'center' and not '{self.pos_y}'")
+            raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_y}'")
         self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
 
     def set_text(self, text):
@@ -201,47 +201,47 @@ class Label:
         """
         return self.font_size
 
-    def get_pos_x(self):
+    def get_align_x(self):
         """
-        Gets the label's pos x
+        Gets the label's align x
 
         :return: bool
         """
-        return self.pos_x
+        return self.align_x
 
-    def get_pos_y(self):
+    def get_align_y(self):
         """
-        Gets the label's pos y
+        Gets the label's align y
 
         :return: bool
         """
-        return self.pos_y
+        return self.align_y
 
-    def set_pos_x(self, pos_x):
+    def set_align_x(self, align_x):
         """
-        Sets the label's pos x
+        Sets the label's align x
 
-        :param pos_x: bool
+        :param align_x: bool
         """
-        self.pos_x = pos_x
+        self.align_x = align_x
 
-    def set_pos_y(self, pos_y):
+    def set_align_y(self, align_y):
         """
         Sets the label's pos y
 
-        :param pos_y: bool
+        :param align_y: bool
         """
-        self.pos_y = pos_y
+        self.align_y = align_y
 
-    def set_pos(self, pos_x, pos_y):
+    def set_align(self, align_x, align_y):
         """
         Sets the label's pos
 
         :param pos_x: bool
         :param pos_y: bool
         """
-        self.set_pos_x(pos_x)
-        self.set_pos_y(pos_y)
+        self.set_align_x(align_x)
+        self.set_align_y(align_y)
 
     def update(self):
         """

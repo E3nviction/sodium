@@ -100,6 +100,14 @@ class Button:
         """
         return self.locked
 
+    def is_disabled(self):
+        """
+        Checks if the button is disabled
+
+        :return: bool
+        """
+        return self.disabled
+
     def set_on_click_func(self, func):
         """
         Sets the button's on click function
@@ -271,6 +279,14 @@ class Button:
         :param y: int
         """
         self.label_y = y
+    
+    def set_locked(self, locked):
+        """
+        Sets the button's locked
+
+        :param locked: bool
+        """
+        self.locked = locked
 
     def get_label_x(self):
         """
@@ -288,6 +304,32 @@ class Button:
         """
         return self.label_y
 
+    def get_font(self):
+        """
+        Gets the button's font
+
+        :return: str
+        """
+        return self.font
+    
+    def enable(self):
+        """
+        Enables the button
+        """
+        self.disabled = False
+
+    def disable(self):
+        """
+        Disables the button
+        """
+        self.disabled = True
+    
+    def toggle_disabled(self):
+        """
+        Toggles the button's disabled
+        """
+        self.disabled = not self.disabled
+
     def draw(self):
         """
         Draws the button
@@ -301,16 +343,16 @@ class Button:
         font = self.font
         if self.is_active():
             pygame.draw.rect(surface, self.active_background, self.rect)
-            Label(surface, text, rect, self.active_color, font, pos_x=label_x, pos_y=label_y).draw()
+            Label(surface, text, rect, self.active_color, font, align_x=label_x, align_y=label_y).draw()
         elif self.is_touching_mouse():
             pygame.draw.rect(surface, self.hover_background, self.rect)
-            Label(surface, text, rect, self.hover_color, font, pos_x=label_x, pos_y=label_y).draw()
+            Label(surface, text, rect, self.hover_color, font, align_x=label_x, align_y=label_y).draw()
         elif self.disabled:
             pygame.draw.rect(surface, self.disabled_background, self.rect)
-            Label(surface, text, rect, disabled_color, font, pos_x=label_x, pos_y=label_y).draw()
+            Label(surface, text, rect, disabled_color, font, align_x=label_x, align_y=label_y).draw()
         else:
             pygame.draw.rect(surface, self.background, self.rect)
-            Label(surface, text, rect, self.color, font, pos_x=label_x, pos_y=label_y).draw()
+            Label(surface, text, rect, self.color, font, align_x=label_x, align_y=label_y).draw()
 
     def update(self):
         """
