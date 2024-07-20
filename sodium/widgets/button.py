@@ -29,7 +29,7 @@ class Button:
         label_y="center",
         disabled=False,
         on_click_func=None,
-        on_click_args=[None],
+        on_click_args=None,
         ):
         """
         Initializes the button

@@ -71,6 +71,7 @@ class Label:
             pass
         else:
             raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_y}'")
+
         self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
 
     def set_text(self, text):
