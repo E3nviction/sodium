@@ -110,7 +110,7 @@ And the button's text will change to "Goodbye, World!".
 
 Note that `on_click_func` is a function that takes no parameters and returns nothing.
 Anyway, let's say we wanted the button to change the text of the label to "Goodbye, World!" but without on_click_func.
-Do you still remember that I said that `on_click_func` is not the only way to do this?
+Do you still remember what I said? That `on_click_func` is not the only way to do this?
 
 well...
 ```python
