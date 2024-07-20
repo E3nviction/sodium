@@ -1,13 +1,17 @@
 import sodium
-from sodium import Window
+from sodium import Button, Window # import the Button and Window classes
 
 sodium.init()
 window = Window(640, 480)
 win = window.get_screen()
 
-label = sodium.Label(win, "Hello, World!")
+# this is the function that will be called when the button is pressed
+def on_button_press():
+    button.set_text("Goodbye, World!") # change the button's text to "Goodbye, World!"
+
+# create the button and set the on_click_func to the on_button_press function
+button = Button(win, "Hello, World!", (50, 50, 150, 50), on_click_func=on_button_press) 
 
 def main():
-    label.set_rect((50, 50, window.get_width() - 100, window.get_height() - 100))
-    label.update()
+    button.update() # update the button
 sodium.start(win, main)

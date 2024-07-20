@@ -17,9 +17,16 @@ To install Sodium, move the sodium folder into your project folder and import it
 import sodium
 ```
 
-## Docs
-### Getting Started
-#### Create a window
+## License
+This project is licensed under the MIT license.
+which means that you can use this project in any way you want.
+Fork it, modify it, or redistribute it as you wish.
+For more information, visit [https://github.com/E3nviction/sodium/blob/main/LICENSE](https://github.com/E3nviction/sodium/blob/main/LICENSE)
+
+
+# Docs
+## Getting Started
+### Create a window
 ```python
 import sodium # import sodium
 from sodium import Window # import the Window class
@@ -33,7 +40,7 @@ def main(): # define the main function
     pass 
 sodium.start(win, main) # start sodium mainloop
 ```
-#### Hello World
+### Hello World
 To get started with Sodium, create a new file named `main.py` and copy the code below into it.
 ```python
 import sodium # import sodium
@@ -52,7 +59,7 @@ sodium.start(win, main) # start sodium mainloop
 ```
 this will create a window with a label "Hello, World!" in the center of the screen.
 resize the window and the label will update to the new position.
-#### Button
+### Button
 To create a button, you can use the `Button` class.
 ```python
 import sodium # import sodium
@@ -72,9 +79,27 @@ sodium.start(win, main)
 in this example, the button will be created at position (50, 50) with size 150x50.
 and pressing the button will do nothing.
 
+but what if we wanted the button to do something?
+let's say we wanted the button to change the text of the label to "Goodbye, World!" when the button is pressed.
 
-## License
-This project is licensed under the MIT license.
-which means that you can use this project in any way you want.
-Fork it, modify it, or redistribute it as you wish.
-For more information, visit [https://github.com/E3nviction/sodium/blob/main/LICENSE](https://github.com/E3nviction/sodium/blob/main/LICENSE)
+for this, we can use the `Button` class's `on_click` method. (remember that this is not the only way to do this)
+```python
+import sodium
+from sodium import Button, Window # import the Button and Window classes
+
+sodium.init()
+window = Window(640, 480)
+win = window.get_screen()
+
+# this is the function that will be called when the button is pressed
+def on_button_press():
+    button.set_text("Goodbye, World!") # change the button's text to "Goodbye, World!"
+
+# create the button and set the on_click_func to the on_button_press function
+button = Button(win, "Hello, World!", (50, 50, 150, 50), on_click_func=on_button_press) 
+
+def main():
+    button.update() # update the button
+sodium.start(win, main)
+```
+
