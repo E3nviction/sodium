@@ -1,4 +1,5 @@
 import sodium
+sodium.require("0.0.3")
 from sodium.widgets import Button # import the button widget
 from sodium import Window # import the window class
 
@@ -19,7 +20,7 @@ def toggle_button_2_v3():
     button_2.toggle_disabled()
 
 # create the button with the on_click_func to toggle the second button
-button = Button(win, "Toggle, it!", (50, 50, 150, 50), on_click_func=toggle_button_2)
+button = Button(win, "Toggle, it! wow this is so long", (50, 50, 150, 50), on_click_func=toggle_button_2)
 
 button_2 = Button(win, "Toggle, me!", (50, 150, 150, 50), disabled=True) # create the second button
 button_2.set_on_click_func(lambda: print("I'm Alive!!!")) # set the on_click_func to print "I'm Alive!!!"
