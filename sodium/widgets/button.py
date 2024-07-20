@@ -28,7 +28,7 @@ class Button:
         label_x="center",
         label_y="center",
         disabled=False,
-        onclickfunc=None,
+        on_click_func=None,
         ):
         """
         Initializes the button
@@ -50,7 +50,7 @@ class Button:
         :param label_x: str [left, center, right]
         :param label_y: str [top, center, bottom]
         :param disabled: bool
-        :param onclickfunc: function
+        :param on_click_func: function
         """
         super().__init__()
         self.surface = surface
@@ -70,7 +70,7 @@ class Button:
         self.label_x = label_x
         self.label_y = label_y
         self.disabled = disabled
-        self.onclickfunc = onclickfunc
+        self.on_click_func = on_click_func
         self.locked = False
 
         if font is None:
@@ -100,14 +100,13 @@ class Button:
         """
         return self.locked
 
-    def set_on_click(self, func, *args):
+    def set_on_click_func(self, func):
         """
         Sets the button's on click function
 
         :param func: function
-        :param args: tuple
         """
-        self.onclickfunc = (func, args)
+        self.on_click_func = func
 
     def set_text(self, text):
         """
@@ -252,8 +251,8 @@ class Button:
         """
         if self.is_active() and not self.is_locked():
             self.locked = True
-            if self.onclickfunc:
-                self.onclickfunc[0](*self.onclickfunc[1])
+            if self.on_click_func:
+                self.on_click_func()
         if not self.is_active():
             self.locked = False
 

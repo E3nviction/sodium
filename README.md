@@ -82,6 +82,7 @@ and pressing the button will do nothing.
 but what if we wanted the button to do something?
 let's say we wanted the button to change the text of the label to "Goodbye, World!" when the button is pressed.
 
+#### on_click_func
 for this, we can use the `Button` class's `on_click` method. (remember that this is not the only way to do this)
 ```python
 import sodium
@@ -102,4 +103,6 @@ def main():
     button.update() # update the button
 sodium.start(win, main)
 ```
+Great! Now, when the button is pressed, the `on_button_press` function will be called.
+And the button's text will change to "Goodbye, World!".
 
