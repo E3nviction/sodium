@@ -30,7 +30,7 @@ For more information, visit [https://github.com/E3nviction/sodium/blob/main/LICE
 To create a window, use the `Window` class.
 ```python
 import sodium # import sodium
-from sodium import Window # import the Window class
+from sodium import Window # import the window class
 
 sodium.init() # initialize sodium
 window = Window(640, 480) # create a window with width 640 and height 480
@@ -46,7 +46,7 @@ this will create a window with width 640 and height 480.
 To get started with Sodium, create a new file named `main.py` and copy the code below into it.
 ```python
 import sodium # import sodium
-from sodium import Window # import the Window class
+from sodium import Window # import the window class
 
 sodium.init() # initialize sodium
 window = Window(640, 480) # create a window with width 640 and height 480
@@ -65,7 +65,8 @@ resize the window and the label will update to the new position.
 To create a button, you can use the `Button` class.
 ```python
 import sodium # import sodium
-from sodium import Button, Window # import the Button and Window classes
+from sodium.widgets import Button # import the button widget
+from sodium import Window # import the window class
 
 sodium.init()
 window = Window(640, 480)
@@ -88,7 +89,8 @@ let's say we wanted the button to change the text of the label to "Goodbye, Worl
 for this, we can use the `Button` class's `on_click` method. (note that this is not the only way to do this)
 ```python
 import sodium
-from sodium import Button, Window # import the Button and Window classes
+from sodium.widgets import Button # import the button widget
+from sodium import Window # import the window class
 
 sodium.init()
 window = Window(640, 480)
@@ -115,7 +117,8 @@ Do you still remember what I said? That `on_click_func` is not the only way to d
 well...
 ```python
 import sodium
-from sodium import Button, Window # import the Button and Window classes
+from sodium.widgets import Button # import the button widget
+from sodium import Window # import the window class
 
 sodium.init()
 window = Window(640, 480)
@@ -158,7 +161,8 @@ When disabled, the button will not be able to be pressed and will change the col
 Let's create an application with 2 buttons. One button will toggle the disabled state of the other button.
 ```python
 import sodium
-from sodium import Button, Window # import the Button and Window classes
+from sodium.widgets import Button # import the button widget
+from sodium import Window # import the window class
 
 sodium.init()
 window = Window(640, 480)

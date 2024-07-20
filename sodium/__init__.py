@@ -18,18 +18,11 @@ sys.stdout = sys.__stdout__
 from .settings import *
 from .window import *
 from .common import *
-from .widgets import *
 from .constants import *
 from .builtins import *
 from .event import *
 from .theme import *
 from .mainloop import *
-
-
-
-
-
-
 
 __all__ = [
     "settings",
