@@ -1,18 +1,12 @@
 """
 Module for creating windows
 """
-import sys
-import os
-import warnings
+import pygame
 import sodium
 
 from . import constants
 
-sys.stdout = open(os.devnull, 'w', encoding='utf-8')
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*avx2.*")
-import pygame  # pylint: disable=wrong-import-order, wrong-import-position
-sys.stdout = sys.__stdout__
+
 
 class Window:
     """
