@@ -1,0 +1,4 @@
+ - [ ] make button be able to use left, middle and right mouse buttons
+ - [ ] make button be able to check on release
+ - [ ] add checkbox
+ - [ ] add radio button

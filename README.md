@@ -85,7 +85,7 @@ but what if we wanted the button to do something?
 let's say we wanted the button to change the text of the label to "Goodbye, World!" when the button is pressed.
 
 #### on_click_func
-for this, we can use the `Button` class's `on_click` method. (remember that this is not the only way to do this)
+for this, we can use the `Button` class's `on_click` method. (note that this is not the only way to do this)
 ```python
 import sodium
 from sodium import Button, Window # import the Button and Window classes
@@ -108,3 +108,113 @@ sodium.start(win, main)
 Great! Now, when the button is pressed, the `on_button_press` function will be called.
 And the button's text will change to "Goodbye, World!".
 
+Note that `on_click_func` is a function that takes no parameters and returns nothing.
+Anyway, let's say we wanted the button to change the text of the label to "Goodbye, World!" but without on_click_func.
+Do you still remember that I said that `on_click_func` is not the only way to do this?
+
+well...
+```python
+import sodium
+from sodium import Button, Window # import the Button and Window classes
+
+sodium.init()
+window = Window(640, 480)
+win = window.get_screen()
+
+# this is the function that will be called when the button is pressed
+def on_button_press():
+    button.set_text("Goodbye, World!") # change the button's text to "Goodbye, World!"
+
+# create the button and set the on_click_func to the on_button_press function
+button = Button(win, "Hello, World!", (50, 50, 150, 50))
+
+def main():
+    if button.is_active() and not button.is_locked(): # if the button is active
+        button.set_locked(True) # lock the button
+        on_button_press() # call the on_button_press function
+    if not button.is_active(): # if the button is not active
+        button.set_locked(False) # unlock the button
+    button.draw() # draw the button, because with the update function it would check for button clicks twice
+
+sodium.start(win, main)
+
+```
+As you can see, we can do this without using `on_click_func`.
+We are utilizing the `is_active` and `is_locked` methods of the `Button` class.
+so when pressing the button it locks the button and calls the `on_button_press` function.
+when locked the button will not be able to be pressed again.
+
+And when releasing the button, the button will be unlocked.
+
+And to be honest, That's still not the only ways to do this.
+but we will be looking at more ways to do this in the future.
+
+For now, let's go to the next section!
+
+#### Disabling and Enabling Buttons
+A button can be disabled and enabled.
+When disabled, the button will not be able to be pressed and will change the color.
+
+Let's create an application with 2 buttons. One button will toggle the disabled state of the other button.
+```python
+import sodium
+from sodium import Button, Window # import the Button and Window classes
+
+sodium.init()
+window = Window(640, 480)
+win = window.get_screen()
+
+def toggle_button_2():
+    if button_2.is_disabled(): # if the second button is disabled
+        button_2.enable() # enable the second button
+    else: # if the second button is not disabled
+        button_2.disable() # disable the second button
+# or...
+def toggle_button_2_v2():
+    button_2.set_disabled(not button_2.is_disabled())
+# or...
+def toggle_button_2_v3():
+    button_2.toggle_disabled()
+
+# create the button with the on_click_func to toggle the second button
+button = Button(win, "Toggle, it!", (50, 50, 150, 50), on_click_func=toggle_button_2)
+
+button_2 = Button(win, "Toggle, me!", (50, 150, 150, 50), disabled=True) # create the second button
+button_2.set_on_click_func(lambda: print("I'm Alive!!!")) # set the on_click_func to print "I'm Alive!!!"
+
+def main():
+    button.update() # update the button
+    button_2.update() # update the second button
+sodium.start(win, main)
+```
+
+Look at that code! You can see that the second button is disabled by default.
+And we even used a new method to set the function that will be called when the button is pressed.
+`set_on_click_func(func)`.
+
+You now have learned the basics of buttons. Let's leave the tutorial.
+## Advanced
+### Widgets
+#### Labels
+A Label is a widget that displays text on the screen.
+it's properties include:
+surface
+text
+rect
+color
+font
+font_family
+font_size
+align_x
+align_y
+
+The surface is the surface that the label will be drawn on,
+Text is the text that will be displayed,
+Rect is the rectangle that the label will be drawn on,
+Color is the color of the label,
+Font requires a Font object that will be used to display the text,
+Font_family is the font family that will be used to display the text,
+Font_size is the font size that will be used to display the text,
+align_x is the alignment of the label on the x axis, left, center, or right,
+align_y is the alignment of the label on the y axis, top, center, or bottom.
+... more docs will be added in the future.
