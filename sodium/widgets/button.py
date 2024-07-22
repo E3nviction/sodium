@@ -8,6 +8,68 @@ from .label import Label
 class Button:
     """
     A button widget
+
+    methods:
+        __init__(
+            self,
+            surface,
+            text,
+            rect=(0, 0, 0, 0),
+            color="theme",
+            background="theme",
+            hover_color="theme",
+            hover_background="theme",
+            active_color="theme",
+            active_background="theme",
+            disabled_color="theme",
+            disabled_background="theme",
+            font=None,
+            font_family=None,
+            font_size=20,
+            label_x="center",
+            label_y="center",
+            disabled=False,
+            on_click_func=None,
+            on_click_args=None,
+            )
+        draw(self)
+        set_text(self, text)
+        get_text(self)
+        set_rect(self, rect)
+        get_rect(self)
+        set_color(self, color)
+        get_color(self)
+        set_background(self, background)
+        get_background(self)
+        set_hover_color(self, hover_color)
+        get_hover_color(self)
+        set_hover_background(self, hover_background)
+        get_hover_background(self)
+        set_active_color(self, active_color)
+        get_active_color(self)
+        set_active_background(self, active_background)
+        get_active_background(self)
+        set_disabled_color(self, disabled_color)
+        get_disabled_color(self)
+        set_disabled_background(self, disabled_background)
+        get_disabled_background(self)
+        set_font(self, font)
+        get_font(self)
+        set_font_family(self, font_family)
+        get_font_family(self)
+        set_font_size(self, font_size)
+        get_font_size(self)
+        set_label_x(self, label_x)
+        get_label_x(self)
+        set_label_y(self, label_y)
+        get_label_y(self)
+        set_disabled(self, disabled)
+        get_disabled(self)
+        set_on_click_func(self, on_click_func)
+        get_on_click_func(self)
+        set_on_click_args(self, on_click_args)
+        get_on_click_args(self)
+        update(self)
     """
     def __init__(
         self,

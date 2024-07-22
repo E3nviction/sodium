@@ -1,3 +1,4 @@
+ - [x] add bounds to the label, so it doesnt overflow
  - [ ] make button be able to use left, middle and right mouse buttons
  - [ ] make button be able to check on release
  - [ ] add more button methods for on_click_args

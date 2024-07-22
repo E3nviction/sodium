@@ -1,8 +1,8 @@
 import sodium
-sodium.require("0.0.3")
 from sodium.widgets import Button # import the button widget
 from sodium import Window # import the window class
 
+sodium.require("0.0.3")
 sodium.init()
 window = Window(640, 480)
 win = window.get_screen()

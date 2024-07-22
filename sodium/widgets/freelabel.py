@@ -3,13 +3,13 @@ Label widget module
 """
 from .. import constants, common
 
-class Label:
+class FreeLabel:
     """
-    A label widget that displays text on a Pygame surface with rendering constraints.
-    The text is clipped to a defined rectangular area.
+    A label widget that displays text on a Pygame surface without any rendering constraints.
 
     methods:
-        __init__(self,
+        __init__(
+            self,
             surface,
             text,
             rect=(0, 0, 0, 0),
@@ -104,17 +104,7 @@ class Label:
         else:
             raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_y}'")
 
-        # Save the current clipping area
-        old_clip = self.surface.get_clip()
-
-        # Define the clipping area
-        self.surface.set_clip(self.rect)
-
-        # Blit the text surface within the rectangle
         self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
-
-        # Restore the old clipping area
-        self.surface.set_clip(old_clip)
 
     def set_text(self, text):
         """
