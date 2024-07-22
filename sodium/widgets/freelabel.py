@@ -92,7 +92,7 @@ class FreeLabel:
         elif self.align_x == "right":
             new_rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
         elif self.align_x == "left":
-            pass
+            new_rect[0] = self.rect.x
         else:
             raise ValueError(f"align_x must be 'left', 'right', or 'center' and not '{self.align_x}'")
         if self.align_y == "center":
@@ -100,7 +100,7 @@ class FreeLabel:
         elif self.align_y == "bottom":
             new_rect[1] = self.rect.h + self.rect.y - self.font.get_height()
         elif self.align_y == "top":
-            pass
+            new_rect[1] = self.rect.y
         else:
             raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_y}'")
 
