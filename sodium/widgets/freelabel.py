@@ -71,18 +71,8 @@ class FreeLabel:
             new_rect[1] = self.rect.y
         else:
             raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_vertical}'")
-
-        # Save the current clipping area
-        old_clip = self.surface.get_clip()
-
-        # Define the clipping area
-        self.surface.set_clip(self.rect)
-
-        # Blit the text surface within the rectangle
+        
         self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
-
-        # Restore the old clipping area
-        self.surface.set_clip(old_clip)
 
     def set_text(self, text):
         """
