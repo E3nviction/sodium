@@ -341,8 +341,8 @@ disabled_background="theme" : The background color of the button when disabled
 font=None                   : The sodium.Font of the button
 font_family=None            : The font family of the button
 font_size=20                : The font size of the button
-label_x="center"            : The horizontal alignment of the button's text ("left", "center", "right")
-label_y="center"            : The vertical alignment of the button's text ("top", "center", "bottom")
+label_horizontal="center"   : The horizontal alignment of the button's text ("left", "center", "right")
+label_vertical="center"     : The vertical alignment of the button's text ("top", "center", "bottom")
 disabled=False              : Whether the button is disabled or not
 on_click_func=None          : The function that will be called when the button is pressed
 on_click_args=None          : The arguments that will be passed to the `on_click_func` function
@@ -374,11 +374,11 @@ set_active_color(self, color)
 set_active_background(self, color)
 set_font(self, font_family, font_size)
 on_click(self)
-set_label_x(self, x)
-set_label_y(self, y)
+set_label_horizontal(self, horizontal)
+set_label_vertical(self, vertical)
 set_locked(self, locked)
-get_label_x(self)
-get_label_y(self)
+get_label_horizontal(self)
+get_label_vertical(self)
 get_font(self)
 enable(self)
 disable(self)

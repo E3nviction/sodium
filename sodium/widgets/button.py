@@ -7,69 +7,7 @@ from .label import Label
 
 class Button:
     """
-    A button widget
-
-    methods:
-        __init__(
-            self,
-            surface,
-            text,
-            rect=(0, 0, 0, 0),
-            color="theme",
-            background="theme",
-            hover_color="theme",
-            hover_background="theme",
-            active_color="theme",
-            active_background="theme",
-            disabled_color="theme",
-            disabled_background="theme",
-            font=None,
-            font_family=None,
-            font_size=20,
-            label_x="center",
-            label_y="center",
-            disabled=False,
-            on_click_func=None,
-            on_click_args=None,
-            )
-        draw(self)
-        set_text(self, text)
-        get_text(self)
-        set_rect(self, rect)
-        get_rect(self)
-        set_color(self, color)
-        get_color(self)
-        set_background(self, background)
-        get_background(self)
-        set_hover_color(self, hover_color)
-        get_hover_color(self)
-        set_hover_background(self, hover_background)
-        get_hover_background(self)
-        set_active_color(self, active_color)
-        get_active_color(self)
-        set_active_background(self, active_background)
-        get_active_background(self)
-        set_disabled_color(self, disabled_color)
-        get_disabled_color(self)
-        set_disabled_background(self, disabled_background)
-        get_disabled_background(self)
-        set_font(self, font)
-        get_font(self)
-        set_font_family(self, font_family)
-        get_font_family(self)
-        set_font_size(self, font_size)
-        get_font_size(self)
-        set_label_x(self, label_x)
-        get_label_x(self)
-        set_label_y(self, label_y)
-        get_label_y(self)
-        set_disabled(self, disabled)
-        get_disabled(self)
-        set_on_click_func(self, on_click_func)
-        get_on_click_func(self)
-        set_on_click_args(self, on_click_args)
-        get_on_click_args(self)
-        update(self)
+    A button widget that displays text and is clickable with a mouse button, aswell as being able to be disabled and enabled.
     """
     def __init__(
         self,
@@ -87,11 +25,12 @@ class Button:
         font=None,
         font_family=None,
         font_size=20,
-        label_x="center",
-        label_y="center",
+        label_horizontal="center",
+        label_vertical="center",
         disabled=False,
         on_click_func=None,
         on_click_args=None,
+        mouse_button=0
         ):
         """
         Initializes the button
@@ -110,11 +49,12 @@ class Button:
         :param font: Font
         :param font_family: str
         :param font_size: int
-        :param label_x: str [left, center, right]
-        :param label_y: str [top, center, bottom]
+        :param label_horizontal: str [left, center, right]
+        :param label_vertical: str [top, center, bottom]
         :param disabled: bool
         :param on_click_func: function
         :param on_click_args: list
+        :param mouse_button: int
         """
         super().__init__()
         self.surface = surface
@@ -131,12 +71,13 @@ class Button:
         self.font = font
         self.font_family = font_family
         self.font_size = font_size
-        self.label_x = label_x
-        self.label_y = label_y
+        self.label_horizontal = label_horizontal
+        self.label_vertical = label_vertical
         self.disabled = disabled
         self.on_click_func = on_click_func
         self.on_click_args = on_click_args
         self.locked = False
+        self.mouse_button = mouse_button
 
         if font is None:
             self.font = common.set_font(font_family, font_size)
@@ -155,7 +96,7 @@ class Button:
 
         :return: bool
         """
-        return self.is_touching_mouse() and pygame.mouse.get_pressed()[0] and not self.disabled
+        return self.is_touching_mouse() and pygame.mouse.get_pressed()[self.mouse_button] and not self.disabled
 
     def is_locked(self):
         """
@@ -348,21 +289,21 @@ class Button:
         if not self.is_active():
             self.locked = False
 
-    def set_label_x(self, x):
+    def set_label_horizontal(self, horizontal):
         """
-        Sets the button's label x
+        Sets the button's label horizontal
 
-        :param x: int
+        :param horizontal: str
         """
-        self.label_x = x
+        self.label_horizontal = horizontal
 
-    def set_label_y(self, y):
+    def set_label_vertical(self, vertical):
         """
-        Sets the button's label y
+        Sets the button's label vertical
 
-        :param y: int
+        :param vertical: str
         """
-        self.label_y = y
+        self.label_vertical = vertical
     
     def set_locked(self, locked):
         """
@@ -372,21 +313,21 @@ class Button:
         """
         self.locked = locked
 
-    def get_label_x(self):
+    def get_label_horizontal(self):
         """
-        Gets the button's label x
+        Gets the button's label horizontal
 
-        :return: int
+        :return: str
         """
-        return self.label_x
+        return self.label_horizontal
 
-    def get_label_y(self):
+    def get_label_vertical(self):
         """
-        Gets the button's label y
+        Gets the button's label vertical
 
-        :return: int
+        :return: str
         """
-        return self.label_y
+        return self.label_vertical
 
     def get_font(self):
         """
@@ -413,6 +354,22 @@ class Button:
         Toggles the button's disabled
         """
         self.disabled = not self.disabled
+    
+    def get_mouse_button(self):
+        """
+        Gets the button's mouse button
+
+        :return: int
+        """
+        return self.mouse_button
+
+    def set_mouse_button(self, mouse_button):
+        """
+        Sets the button's mouse button
+
+        :param mouse_button: int
+        """
+        self.mouse_button = mouse_button
 
     def draw(self):
         """
@@ -420,23 +377,23 @@ class Button:
         """
         disabled_color = self.disabled_color
         surface = self.surface
-        label_x = self.label_x
-        label_y = self.label_y
+        label_horizontal = self.label_horizontal
+        label_vertical = self.label_vertical
         text = self.text
         rect = self.rect
         font = self.font
-        if self.is_active():
+        if self.is_active() and not self.is_disabled():
             pygame.draw.rect(surface, self.active_background, self.rect)
-            Label(surface, text, rect, self.active_color, font, align_x=label_x, align_y=label_y).draw()
+            Label(surface, text, rect, self.active_color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
         elif self.is_touching_mouse():
             pygame.draw.rect(surface, self.hover_background, self.rect)
-            Label(surface, text, rect, self.hover_color, font, align_x=label_x, align_y=label_y).draw()
+            Label(surface, text, rect, self.hover_color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
         elif self.disabled:
             pygame.draw.rect(surface, self.disabled_background, self.rect)
-            Label(surface, text, rect, disabled_color, font, align_x=label_x, align_y=label_y).draw()
+            Label(surface, text, rect, disabled_color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
         else:
             pygame.draw.rect(surface, self.background, self.rect)
-            Label(surface, text, rect, self.color, font, align_x=label_x, align_y=label_y).draw()
+            Label(surface, text, rect, self.color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
 
     def update(self):
         """
