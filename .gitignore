@@ -1,3 +1,4 @@
 main.py
 venv
 sodium/__pycache__
+sodium/widgets/__pycache__
