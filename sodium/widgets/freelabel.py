@@ -5,39 +5,7 @@ from .. import constants, common
 
 class FreeLabel:
     """
-    A label widget that displays text on a Pygame surface without any rendering constraints.
-
-    methods:
-        __init__(
-            self,
-            surface,
-            text,
-            rect=(0, 0, 0, 0),
-            color="theme",
-            font=None,
-            font_family=None,
-            font_size=20,
-            align_x="center",
-            align_y="center"
-            )
-        draw(self)
-        set_text(self, text)
-        get_text(self)
-        set_rect(self, rect)
-        get_rect(self)
-        set_color(self, color)
-        get_color(self)
-        set_font(self, font)
-        get_font(self)
-        set_font_family(self, font_family)
-        get_font_family(self)
-        set_font_size(self, font_size)
-        get_font_size(self)
-        set_align_x(self, align_x)
-        get_align_x(self)
-        set_align_y(self, align_y)
-        get_align_y(self)
-        update(self)
+    A label widget that displays text on a surface without any rendering constraints.
     """
     def __init__(
         self,
@@ -48,8 +16,8 @@ class FreeLabel:
         font=None,
         font_family=None,
         font_size=20,
-        align_x="center",
-        align_y="center",
+        align_horizontal="center",
+        align_vertical="center",
         ):
         """
         Initializes the label
@@ -61,8 +29,8 @@ class FreeLabel:
         :param font: Font
         :param font_family: str
         :param font_size: int
-        :param align_x: bool
-        :param align_y: bool
+        :param align_horizontal: bool
+        :param align_vertical: bool
         """
         super().__init__()
         self.surface = surface
@@ -72,8 +40,8 @@ class FreeLabel:
         self.font = font
         self.font_family = font_family
         self.font_size = font_size
-        self.align_x = align_x
-        self.align_y = align_y
+        self.align_horizontal = align_horizontal
+        self.align_vertical = align_vertical
 
         if font is None:
             self.font = common.set_font(font_family, font_size)
@@ -87,24 +55,34 @@ class FreeLabel:
 
         new_rect = [0, 0, 0, 0]
 
-        if self.align_x == "center":
+        if self.align_horizontal == "center":
             new_rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.text)[0] / 2
-        elif self.align_x == "right":
+        elif self.align_horizontal == "right":
             new_rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
-        elif self.align_x == "left":
+        elif self.align_horizontal == "left":
             new_rect[0] = self.rect.x
         else:
-            raise ValueError(f"align_x must be 'left', 'right', or 'center' and not '{self.align_x}'")
-        if self.align_y == "center":
+            raise ValueError(f"align_x must be 'left', 'right', or 'center' and not '{self.align_horizontal}'")
+        if self.align_vertical == "center":
             new_rect[1] = self.rect.h / 2 + self.rect.y - self.font.get_height() / 2
-        elif self.align_y == "bottom":
+        elif self.align_vertical == "bottom":
             new_rect[1] = self.rect.h + self.rect.y - self.font.get_height()
-        elif self.align_y == "top":
+        elif self.align_vertical == "top":
             new_rect[1] = self.rect.y
         else:
-            raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_y}'")
+            raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_vertical}'")
 
+        # Save the current clipping area
+        old_clip = self.surface.get_clip()
+
+        # Define the clipping area
+        self.surface.set_clip(self.rect)
+
+        # Blit the text surface within the rectangle
         self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
+
+        # Restore the old clipping area
+        self.surface.set_clip(old_clip)
 
     def set_text(self, text):
         """
@@ -122,6 +100,14 @@ class FreeLabel:
         """
         return self.text
 
+    def set_rect(self, rect):
+        """
+        Sets the label's rect
+
+        :param rect: Rect
+        """
+        self.rect = constants.Rect(rect)
+
     def get_rect(self):
         """
         Gets the label's rect
@@ -130,7 +116,7 @@ class FreeLabel:
         """
         return self.rect
 
-    def get_size(self):
+    def get_text_size(self):
         """
         Gets the label's size
 
@@ -138,29 +124,37 @@ class FreeLabel:
         """
         return self.font.size(self.text)
 
-    def get_width(self):
+    def get_text_width(self):
         """
         Gets the label's width
 
         :return: int
         """
-        return self.get_size()[0]
+        return self.get_text_size()[0]
 
-    def get_height(self):
+    def get_text_height(self):
         """
         Gets the label's height
 
         :return: int
         """
-        return self.get_size()[1]
+        return self.get_text_size()[1]
 
-    def set_rect(self, rect):
+    def get_x(self):
         """
-        Sets the label's rect
+        Gets the label's x
 
-        :param rect: Rect
+        :return: int
         """
-        self.rect = constants.Rect(rect)
+        return self.rect.x
+
+    def get_y(self):
+        """
+        Gets the label's y
+
+        :return: int
+        """
+        return self.rect.y
 
     def set_x(self, x):
         """
@@ -178,6 +172,22 @@ class FreeLabel:
         """
         self.rect.y = y
 
+    def get_width(self):
+        """
+        Gets the label's width
+
+        :return: int
+        """
+        return self.rect.w
+
+    def get_height(self):
+        """
+        Gets the label's height
+
+        :return: int
+        """
+        return self.rect.h
+
     def set_width(self, width):
         """
         Sets the label's width
@@ -194,6 +204,14 @@ class FreeLabel:
         """
         self.rect.h = height
 
+    def get_color(self):
+        """
+        Gets the label's color
+
+        :return: Color
+        """
+        return self.color
+
     def set_color(self, color):
         """
         Sets the label's color
@@ -202,14 +220,6 @@ class FreeLabel:
         """
         self.color = common.set_color(color, "FOREGROUND")
 
-    def set_font(self, font_family, font_size):
-        """
-        Sets the label's font
-
-        :param font: str
-        """
-        self.font = common.set_font(font_family, font_size)
-
     def get_font(self):
         """
         Gets the label's font
@@ -217,6 +227,14 @@ class FreeLabel:
         :return: str
         """
         return self.font
+
+    def set_font(self, font_family, font_size):
+        """
+        Sets the label's font
+
+        :param font: str
+        """
+        self.font = common.set_font(font_family, font_size)
 
     def get_font_family(self):
         """
@@ -234,47 +252,72 @@ class FreeLabel:
         """
         return self.font_size
 
-    def get_align_x(self):
+    def set_font_family(self, font_family):
         """
-        Gets the label's align x
+        Sets the label's font family
 
-        :return: bool
+        :param font_family: str
         """
-        return self.align_x
+        self.font_family = font_family
 
-    def get_align_y(self):
+    def set_font_size(self, font_size):
         """
-        Gets the label's align y
+        Sets the label's font size
 
-        :return: bool
+        :param font_size: int
         """
-        return self.align_y
+        self.font_size = font_size
 
-    def set_align_x(self, align_x):
-        """
-        Sets the label's align x
 
-        :param align_x: bool
+    def get_align_horizontal(self):
         """
-        self.align_x = align_x
+        Gets the label's horizontal alignment
 
-    def set_align_y(self, align_y):
+        :return: str
         """
-        Sets the label's pos y
+        return self.align_horizontal
 
-        :param align_y: bool
+    def get_align_vertical(self):
         """
-        self.align_y = align_y
+        Gets the label's vertical alignment
 
-    def set_align(self, align_x, align_y):
+        :return: str
         """
-        Sets the label's pos
+        return self.align_vertical
 
-        :param pos_x: bool
-        :param pos_y: bool
+    def get_align(self):
         """
-        self.set_align_x(align_x)
-        self.set_align_y(align_y)
+        Gets the label's alignment
+
+        :return: tuple
+        """
+        return self.get_align_horizontal(), self.get_align_vertical()
+
+    def set_align_horizontal(self, align_horizontal):
+        """
+        Sets the label's horizontal alignment
+
+        :param align_horizontal: str
+        """
+        self.align_horizontal = align_horizontal
+
+    def set_align_vertical(self, align_vertical):
+        """
+        Sets the label's vertical alignment
+
+        :param align_vertical: str
+        """
+        self.align_vertical = align_vertical
+
+    def set_align(self, align_horizontal, align_vertical):
+        """
+        Sets the label's alignment
+
+        :param align_horizontal: str
+        :param align_vertical: str
+        """
+        self.set_align_horizontal(align_horizontal)
+        self.set_align_vertical(align_vertical)
 
     def update(self):
         """

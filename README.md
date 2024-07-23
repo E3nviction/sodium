@@ -159,10 +159,12 @@ A button can be disabled and enabled.
 When disabled, the button will not be able to be pressed and will change the color.
 
 Let's create an application with 2 buttons. One button will toggle the disabled state of the other button.
+Also let's make the 2nd button disabled by default. And clickable using the right mouse button.
 ```python
 import sodium
 from sodium.widgets import Button # import the button widget
 from sodium import Window # import the window class
+sodium.require("0.0.4")
 
 sodium.init()
 window = Window(640, 480)
@@ -185,6 +187,7 @@ button = Button(win, "Toggle, it!", (50, 50, 150, 50), on_click_func=toggle_butt
 
 button_2 = Button(win, "Toggle, me!", (50, 150, 150, 50), disabled=True) # create the second button
 button_2.set_on_click_func(lambda: print("I'm Alive!!!")) # set the on_click_func to print "I'm Alive!!!"
+button_2.set_mouse_button(2) # set the mouse button to the right mouse button
 
 def main():
     button.update() # update the button
@@ -196,29 +199,194 @@ Look at that code! You can see that the second button is disabled by default.
 And we even used a new method to set the function that will be called when the button is pressed.
 `set_on_click_func(func)`.
 
-You now have learned the basics of buttons. Let's leave the tutorial.
+If you looked closely at the code, you will notice that I added a `sodium.require("0.0.4")` to the top of the file.
+This is because I am using the `sodium` library version 0.0.4. So if you are using a different version of the library, you will get an error.
+This line is not mandatory. It is just a way to make sure that you are using the correct version of the library. But that might change in the future.
+
+You now have learned the basics of buttons. Let's go to the advanced section.
 ## Advanced
 ### Widgets
 #### Labels
-A Label is a widget that displays text on the screen.
-it's properties include:
-surface
-text
-rect
-color
-font
-font_family
-font_size
-align_x
-align_y
+The `Label` widget is used to display text on the screen.
+It has a sibling called the `FreeLabel` which is used to display text on the screen without any bounds.
+Because when using the Label widget, the text will be cut off when not inside its rectangle.
 
-The surface is the surface that the label will be drawn on,
-Text is the text that will be displayed,
-Rect is the rectangle that the label will be drawn on,
-Color is the color of the label,
-Font requires a Font object that will be used to display the text,
-Font_family is the font family that will be used to display the text,
-Font_size is the font size that will be used to display the text,
-align_x is the alignment of the label on the x axis, left, center, or right,
-align_y is the alignment of the label on the y axis, top, center, or bottom.
-... more docs will be added in the future.
+The `Label` has a lot of parameters that can be set.
+To create a Label simply import the `Label` class from the `sodium.widgets` module.
+And then create the Label using the `Label` constructor.
+```python
+label = Label(surface, text, rect, color, font, font_family, font_size, align_x, align_y)
+```
+When creating a Label, you wont actually need all of those parameters.
+Because most of them have a default value. So a simple Label will look like this:
+```python
+label = Label(surface, text, rect)
+```
+Because the Color, font, and alignment parameters are already set by the [theme], we can skip them.
+
+If you want to take a closer look at the parameters I've listed them here:
+`surface`          : The surface on which the label will be drawn
+`text`             : The text that will be displayed
+`rect`             : The rectangle that the label will be drawn in
+`color`            : The color of the text
+`font`             : The sodium.Font of the text
+`font_family`      : The font family of the text
+`font_size`        : The font size of the text
+`align_horizontal` : The horizontal alignment of the text ("left", "center", "right")
+`align_vertical`   : The vertical alignment of the text ("top", "center", "bottom")
+
+Now let's take a look at the methods of the Label widget.
+
+Let's first create a Label:
+```python
+label = Label(win, "Hello, World!", (0,0,150,50))
+```
+now let's render it where the first 2 methods come into play:
+`draw()` and `update()`
+So if we wanted the label to be rendered we could do it like this:
+```python
+label.update()
+```
+or
+```python
+label.draw()
+```
+Because the `update()` method is the same as the `draw()` method, we can use either one.
+
+But okay, let's take a look at another method:
+What if we wanted to change the text of the label?
+or get the label's text?
+
+```python
+label.set_text("Goodbye, World!")
+```
+For this we would use the `set_text()` method.
+And for getting the text we would use the `get_text()` method.
+```python
+text = label.get_text()
+```
+
+Alright, let's go to the next method:
+`set_rect(rect)`
+This method can be used to set the rectangle that the label will be drawn in.
+```python
+label.set_rect((50, 50, 150, 50))
+```
+There's also a `get_rect()` method that can be used to get the rectangle that the label will be drawn in.
+```python
+rect = label.get_rect()
+```
+
+Now, the next 3 methods are for getting the size of the label:
+`get_text_size()`
+`get_text_width()`
+and `get_text_height()`
+
+```python
+size = label.get_text_size()
+width = label.get_text_width()
+height = label.get_text_height()
+```
+These methods are for getting the size of the label. Not the size of the rectangle.
+
+Now, let's go to the next method:
+`get_x()`, `get_y()` and `set_x()`, `set_y()`
+
+Using these methods we can get and set the x and y position of the label.
+
+The next method is `get_width()`, `get_height()` and `set_width()`, `set_height()`
+
+Again, they are self-explanatory. We can use them to set and get the width and height of the label.
+
+Then there's also the `get_color()` and `set_color()`
+
+```python
+color = label.get_color()
+label.set_color((0, 0, 0))
+```
+
+These methods are for getting and setting the color of the label.
+
+next up is the `get_font()` and `set_font()`, aswell as the `get_font_family()`, `get_font_size()`, `set_font_family()` and `set_font_size()`
+
+when setting the font you need to either give it a pre installed font like "Arial" or give it a filename like "path/to/font.ttf"
+
+And finally there's the `get_align_horizontal()`, `get_align_vertical()`, `get_align()` and the opposite methods `set_align_horizontal()`, `set_align_vertical()`, `set_align()`
+
+With these methods we can get and set the horizontal and vertical alignment of the label.
+
+Available alignments are "left", "center", "right" and for align_vertical "top", "middle", "bottom"
+
+
+
+And thats it. (For now)
+The `FreeLabel` is the same as the `Label` but with no bounds when drawing.
+
+#### Buttons
+The `Button` widget is used to create buttons.
+It is able to be pressed and released, disabled and enabled.
+
+The `Button` has a lot of parameters those being
+surface                     : The surface on which the button will be drawn
+text                        : The text that will be displayed
+rect=(0, 0, 0, 0)           : The rectangle that the button will be drawn in
+color="theme"               : The color of the button
+background="theme"          : The background color of the button
+hover_color="theme"         : The color of the button when hovered
+hover_background="theme"    : The background color of the button when hovered
+active_color="theme"        : The color of the button when pressed
+active_background="theme"   : The background color of the button when pressed
+disabled_color="theme"      : The color of the button when disabled
+disabled_background="theme" : The background color of the button when disabled
+font=None                   : The sodium.Font of the button
+font_family=None            : The font family of the button
+font_size=20                : The font size of the button
+label_x="center"            : The horizontal alignment of the button's text ("left", "center", "right")
+label_y="center"            : The vertical alignment of the button's text ("top", "center", "bottom")
+disabled=False              : Whether the button is disabled or not
+on_click_func=None          : The function that will be called when the button is pressed
+on_click_args=None          : The arguments that will be passed to the `on_click_func` function
+mouse_button=0              : The mouse button that will be used when the button is pressed (left=0, middle=1, right=2)
+
+It also has the following methods:
+is_touching_mouse(self)
+is_active(self)
+is_locked(self)
+is_disabled(self)
+set_on_click_func(self, func)
+set_text(self, text)
+get_text(self)
+set_on_click_args(self, args)
+get_on_click_args(self)
+get_rect(self)
+get_size(self)
+get_width(self)
+get_height(self)
+set_rect(self, rect)
+set_color(self, color)
+set_background(self, color)
+set_disabled(self, disabled)
+set_disabled_color(self, color)
+set_disabled_background(self, color)
+set_hover_color(self, color)
+set_hover_background(self, color)
+set_active_color(self, color)
+set_active_background(self, color)
+set_font(self, font_family, font_size)
+on_click(self)
+set_label_x(self, x)
+set_label_y(self, y)
+set_locked(self, locked)
+get_label_x(self)
+get_label_y(self)
+get_font(self)
+enable(self)
+disable(self)
+toggle_disabled(self)
+get_mouse_button(self)
+set_mouse_button(self, mouse_button)
+draw(self)
+update(self)
+
+And again, they are self-explanatory.
+#### checkbox
