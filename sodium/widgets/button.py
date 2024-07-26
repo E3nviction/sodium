@@ -60,13 +60,13 @@ class Button:
         self.surface = surface
         self.text = text
         self.rect = constants.Rect(rect)
-        self.color = common.set_color(color, "FOREGROUND")
+        self.color = common.set_color(color, "ACCENT_FOREGROUND")
         self.background = common.set_color(background, "ACCENT")
         self.hover_color = common.set_color(hover_color, "FOREGROUND")
         self.hover_background = common.set_color(hover_background, "ACCENT_HOVER")
         self.active_color = common.set_color(active_color, "FOREGROUND")
         self.active_background = common.set_color(active_background, "ACCENT_ACTIVE")
-        self.disabled_color = common.set_color(disabled_color, "FOREGROUND_DISABLED")
+        self.disabled_color = common.set_color(disabled_color, "ACCENT_FOREGROUND_DISABLED")
         self.disabled_background = common.set_color(disabled_background, "ACCENT_DISABLED")
         self.font = font
         self.font_family = font_family

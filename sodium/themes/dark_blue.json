@@ -12,6 +12,9 @@
   "ACCENT_ACTIVE": [0, 166, 255],
   "ACCENT_DISABLED": [55, 60, 70],
 
+  "ACCENT_FOREGROUND": [250, 250, 250],
+  "ACCENT_FOREGROUND_DISABLED": [200, 200, 200],
+
 
 
   "FONT": "sodium/fonts/Roboto-Regular.ttf",
