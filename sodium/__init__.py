@@ -40,6 +40,8 @@ __all__ = [
     "init",
     "quit_window",
     "require",
+    "load_theme",
+    "get_theme"
 ]
 
 if not hide_friendly_messages:

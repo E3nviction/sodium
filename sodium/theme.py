@@ -18,6 +18,14 @@ def load_theme(theme):
     :return: dict
     """
     global theme_colors  # pylint: disable=global-statement
+    if theme == "dark blue":
+        theme = "sodium/themes/dark_blue.json"
+    elif theme == "light blue":
+        theme = "sodium/themes/light_blue.json"
+    elif theme == "light":
+        theme = "sodium/themes/light_blue.json"
+    elif theme == "dark":
+        theme = "sodium/themes/dark_blue.json"
     with open(theme, encoding="utf-8") as file:
         theme_colors = json.load(file)
 
