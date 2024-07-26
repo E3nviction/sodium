@@ -162,21 +162,13 @@ class Button:
         """
         return self.rect
 
-    def get_size(self):
-        """
-        Gets the button's size
-
-        :return: tuple
-        """
-        return self.font_family.size(self.text)
-
     def get_width(self):
         """
         Gets the button's width
 
         :return: int
         """
-        return self.get_size()[0]
+        return self.rect.width
 
     def get_height(self):
         """
@@ -184,7 +176,7 @@ class Button:
 
         :return: int
         """
-        return self.get_size()[1]
+        return self.rect.height
 
     def set_rect(self, rect):
         """
@@ -409,3 +401,12 @@ class Button:
         """
         self.on_click()
         self.draw()
+    def reload_theme(self):
+        self.color = common.set_color("theme", "ACCENT_FOREGROUND")
+        self.background = common.set_color("theme", "ACCENT")
+        self.hover_color = common.set_color("theme", "ACCENT_FOREGROUND")
+        self.hover_background = common.set_color("theme", "ACCENT_HOVER")
+        self.active_color = common.set_color("theme", "ACCENT_FOREGROUND")
+        self.active_background = common.set_color("theme", "ACCENT_ACTIVE")
+        self.disabled_color = common.set_color("theme", "ACCENT_FOREGROUND_DISABLED")
+        self.disabled_background = common.set_color("theme", "ACCENT_DISABLED")

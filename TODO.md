@@ -1,10 +1,11 @@
- - [x] add bounds to the label, so it doesnt overflow
- - [x] make button be able to use left, middle and right mouse buttons
- - [ ] make button be able to check on release
- - [ ] add more button methods for on_click_args
- - [x] update README about on_click_args
  - [ ] add checkbox
  - [ ] add radio button
+ - [ ] add list
+ - [ ] add image drawing
+ - [ ] add rounded corners
+ - [ ] add antialiasing
  - [ ] add command menu
  - [ ] add frame to documentation
- - [ ] add theme loading to documentation
+ - [ ] implement transparency
+ - [ ] make only one button be pressable at one time
+ - [ ] mouse can only interact with the most front widget
