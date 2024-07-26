@@ -45,4 +45,4 @@ __all__ = [
 ]
 
 if not hide_friendly_messages:
-    print("SodiumUI v" + __version__)
+    print("Sodium v" + __version__)

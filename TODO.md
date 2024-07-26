@@ -5,7 +5,6 @@ Before 0.1.0
  - [ ] add image drawing
  - [ ] add rounded corners
  - [ ] add antialiasing
- - [ ] add command menu
  - [ ] add frame to documentation
  - [ ] implement transparency
  - [ ] make only one button be pressable at one time

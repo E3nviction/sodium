@@ -7,5 +7,5 @@ def require(version):
     :return: str
     """
     if __version__ != version:
-        raise ImportError("Requires SodiumUI v" + version)
+        raise ImportError("Requires Sodium v" + version)
     return version
