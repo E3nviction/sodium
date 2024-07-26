@@ -403,3 +403,5 @@ get_theme()
 ```
 To get the json data of the current theme.
 to make a custom theme you can create a .json file and then import the them from get_theme() into it.
+But you can also load one of the pre made ones, those including "dark", "light" and "dark blue", aswell as "light blue"
+these will either load the "dark_blue.json" file or the "light_blue.json" file.
