@@ -2,8 +2,6 @@
 main file for sodium
 """
 import sys
-import json
-import os
 
 if len(sys.argv) < 2:
     print("usage: venv [-hc] COMMAND")
