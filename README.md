@@ -389,4 +389,17 @@ draw(self)
 update(self)
 
 And again, they are self-explanatory.
-#### checkbox
+#### Frame
+### themes
+In sodium you can leave the parameters for colors empty which will it load default colors from a theme. The default theme is "dark blue"
+but if you want a custom theme you can use 
+```python
+load_theme(location)
+```
+to load a json file.
+And if you wanted to get the current theme, you can use:
+```python
+get_theme()
+```
+To get the json data of the current theme.
+to make a custom theme you can create a .json file and then import the them from get_theme() into it.

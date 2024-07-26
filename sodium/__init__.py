@@ -42,5 +42,5 @@ __all__ = [
     "require",
 ]
 
-if friendly_messages:
+if not hide_friendly_messages:
     print("SodiumUI v" + __version__)

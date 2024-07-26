@@ -1,5 +1,5 @@
 """
 Settings module
 """
-friendly_errors: bool = True
-friendly_messages: bool = True
+hide_friendly_errors: bool = False
+hide_friendly_messages: bool = False
