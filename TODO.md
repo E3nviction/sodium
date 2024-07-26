@@ -1,7 +1,7 @@
 Before 0.1.0
  - [ ] add checkbox
  - [ ] add radio button
- - [ ] add list
+ - [ ] add list (or something)
  - [ ] add image drawing
  - [ ] add rounded corners
  - [ ] add antialiasing
