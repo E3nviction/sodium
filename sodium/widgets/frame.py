@@ -147,6 +147,14 @@ class Frame:
         :param disabled: bool
         """
         self.disabled = disabled
+    
+    def get_disabled(self):
+        """
+        Gets the Frame's disabled status
+
+        :return: bool
+        """
+        return self.disabled
 
     def set_disabled_color(self, color):
         """
@@ -239,14 +247,13 @@ class Frame:
         label_horizontal = self.label_horizontal
         label_vertical = self.label_vertical
         text = self.text
-        rect = self.rect
         font = self.font
         if self.disabled:
             pygame.draw.rect(surface, self.disabled_background, self.rect)
-            Label(surface, text, rect, self.disabled_color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
+            Label(surface, text, self.rect, self.disabled_color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
         else:
             pygame.draw.rect(surface, self.background, self.rect)
-            Label(surface, text, rect, self.color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
+            Label(surface, text, self.rect, self.color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
 
     def update(self):
         """

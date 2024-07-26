@@ -217,6 +217,14 @@ class Button:
         :param disabled: bool
         """
         self.disabled = disabled
+    
+    def get_disabled(self):
+        """
+        Gets the Frame's disabled status
+
+        :return: bool
+        """
+        return self.disabled
 
     def set_disabled_color(self, color):
         """
