@@ -5,3 +5,6 @@
  - [x] update README about on_click_args
  - [ ] add checkbox
  - [ ] add radio button
+ - [ ] add command menu
+ - [ ] add frame to documentation
+ - [ ] add theme loading to documentation

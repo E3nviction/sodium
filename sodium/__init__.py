@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*avx2.*")
 import pygame
 sys.stdout = sys.__stdout__
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 from .settings import *
 from .window import *

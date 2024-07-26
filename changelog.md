@@ -20,4 +20,7 @@
  - changed Button's label_x and label_y parameters to label_horizontal and label_vertical
  - added sodium/widgets/__pycache__ to gitignore
  - deleted sodium/widgets/__pycache__ folder from repo
- - changed version to 0.0.5
+
+# 0.0.6
+ - added Frame widget (A rectangle with or without a label)
+ - added new colors to "dark blue" theme (default theme)
