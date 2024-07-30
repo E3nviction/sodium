@@ -9,7 +9,6 @@ rm README.md
 rm LICENSE
 rm changelog.md
 rm TODO.md
-cd ../
 mv sodium/* .
-rm sodium/
+rm sodium/ -d
 rm install.sh
