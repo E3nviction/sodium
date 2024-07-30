@@ -7,4 +7,4 @@ fi
 
 mv sodium/ ../sodiumui
 cd ..
-rm -r sodium/
+mv sodiumui/ sodium && rm -r sodiumui
