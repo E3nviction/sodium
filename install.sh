@@ -6,5 +6,5 @@ if [ "$EUID" -ne 0 ]
 fi
 
 mv sodium/ ../sodiumui
-rm -r ../sodium
 cd ..
+rm -r sodium/
