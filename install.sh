@@ -6,5 +6,8 @@ if [ "$EUID" -ne 0 ]
 fi
 
 mv sodium/ ../sodiumui
-cd ..
-mv sodiumui/ sodium && rm -r sodiumui
+rm README.md
+rm LICENSE
+rm changelog.md
+rm TODO.md
+mv ../sodiumui sodium
