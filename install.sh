@@ -5,9 +5,11 @@ if [ "$EUID" -ne 0 ]
     exit
 fi
 
-mv sodium/ ../sodiumui
 rm README.md
 rm LICENSE
 rm changelog.md
 rm TODO.md
-mv ../sodiumui sodium
+cd ../
+mv sodium/* .
+rm sodium/
+rm install.sh
