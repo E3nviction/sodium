@@ -11,3 +11,9 @@ Before 1.0.0
  - [ ] mouse can only interact with the most front widget
  - [ ] add frame.add_widget method
  - [ ] add method get/set system e.g widget.get(x) or widget.set(x, value) (WIP NOT FINAL)
+ - [ ] add child system
+ - [ ] add cache file system
+ - [ ] add .ui extension for ui files
+ - [ ] add better styling
+ - [ ] have sizing and positioning be in different files than the main python file
+ - [ ] .ui files for ui elements | .py files for python code | .ss for element styling | .sod for sodium code | .sdc for cached data
