@@ -1,10 +1,6 @@
 Before 1.0.0
- - [ ] add checkbox
- - [ ] add radio button
- - [ ] add list (or something)
- - [ ] add image drawing
- - [ ] add rounded corners
- - [ ] add antialiasing
+ - [ ] add checkbox, radio button, list, image drawing
+ - [ ] add rounded corners, antialiasing
  - [ ] add frame to documentation
  - [ ] implement transparency
  - [ ] make only one button be pressable at one time
