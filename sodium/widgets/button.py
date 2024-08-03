@@ -186,6 +186,70 @@ class Button:
         """
         self.rect = constants.Rect(rect)
 
+    def get_size(self):
+        """
+        Gets the Button's size
+
+        :return: tuple
+        """
+        return self.rect.size
+    
+    def set_size(self, size):
+        """
+        Sets the Button's size
+
+        :param size: tuple
+        """
+        self.rect.size = size
+    
+    def get_x(self):
+        """
+        Gets the Button's x
+
+        :return: int
+        """
+        return self.rect.x
+    
+    def get_y(self):
+        """
+        Gets the Button's y
+
+        :return: int
+        """
+        return self.rect.y
+
+    def set_x(self, x):
+        """
+        Sets the Button's x
+
+        :param x: int
+        """
+        self.rect.x = x
+
+    def set_y(self, y):
+        """
+        Sets the Button's y
+
+        :param y: int
+        """
+        self.rect.y = y
+    
+    def get_position(self):
+        """
+        Gets the Button's position
+
+        :return: tuple
+        """
+        return self.rect.topleft
+
+    def set_position(self, position):
+        """
+        Sets the Button's position
+
+        :param position: tuple
+        """
+        self.rect.topleft = position
+
     def set_color(self, color):
         """
         Sets the button's color
@@ -212,7 +276,7 @@ class Button:
     
     def get_disabled(self):
         """
-        Gets the Frame's disabled status
+        Gets the Button's disabled status
 
         :return: bool
         """

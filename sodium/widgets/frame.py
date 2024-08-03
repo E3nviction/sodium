@@ -1,6 +1,7 @@
 """
 Frame widget module
 """
+from typing import Any
 import pygame
 from .. import constants, common
 from .label import Label
@@ -115,6 +116,70 @@ class Frame:
         :param rect: Rect
         """
         self.rect = constants.Rect(rect)
+    
+    def get_size(self):
+        """
+        Gets the Frame's size
+
+        :return: tuple
+        """
+        return self.rect.size
+    
+    def set_size(self, size):
+        """
+        Sets the Frame's size
+
+        :param size: tuple
+        """
+        self.rect.size = size
+    
+    def get_x(self):
+        """
+        Gets the Frame's x
+
+        :return: int
+        """
+        return self.rect.x
+    
+    def get_y(self):
+        """
+        Gets the Frame's y
+
+        :return: int
+        """
+        return self.rect.y
+
+    def set_x(self, x):
+        """
+        Sets the Frame's x
+
+        :param x: int
+        """
+        self.rect.x = x
+
+    def set_y(self, y):
+        """
+        Sets the Frame's y
+
+        :param y: int
+        """
+        self.rect.y = y
+    
+    def get_position(self):
+        """
+        Gets the Frame's position
+
+        :return: tuple
+        """
+        return self.rect.topleft
+
+    def set_position(self, position):
+        """
+        Sets the Frame's position
+
+        :param position: tuple
+        """
+        self.rect.topleft = position
 
     def set_color(self, color):
         """
