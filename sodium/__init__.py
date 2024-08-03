@@ -16,6 +16,8 @@ import pygame
 sys.stdout = sys.__stdout__
 
 __version__ = "0.0.7"
+VERSION_0_0_7 = "0.0.7"
+VERSION_LATEST = "latest"
 
 from .settings import *
 from .window import *

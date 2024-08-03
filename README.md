@@ -32,6 +32,7 @@ To create a window, use the `Window` class.
 import sodium # import sodium
 from sodium import Window # import the window class
 
+sodium.require(sodium.__version__)
 sodium.init() # initialize sodium
 window = Window(640, 480) # create a window with width 640 and height 480
 win = window.get_screen() # get the screen of the window to draw on
