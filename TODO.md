@@ -10,3 +10,4 @@ Before 1.0.0
  - [ ] make only one button be pressable at one time
  - [ ] mouse can only interact with the most front widget
  - [ ] add frame.add_widget method
+ - [ ] add method get/set system e.g widget.get(x) or widget.set(x, value) (WIP NOT FINAL)
