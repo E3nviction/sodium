@@ -1,4 +1,4 @@
-Before 0.1.0
+Before 1.0.0
  - [ ] add checkbox
  - [ ] add radio button
  - [ ] add list (or something)
@@ -9,3 +9,4 @@ Before 0.1.0
  - [ ] implement transparency
  - [ ] make only one button be pressable at one time
  - [ ] mouse can only interact with the most front widget
+ - [ ] add frame.add_widget method
