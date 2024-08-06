@@ -24,7 +24,7 @@ Fork it, modify it, or redistribute it as you wish.
 For more information, visit [https://github.com/E3nviction/sodium/blob/main/LICENSE](https://github.com/E3nviction/sodium/blob/main/LICENSE)
 
 
-# Docs
+# Docs (OUT OF DATE)
 ## Getting Started
 ### Create a window
 To create a window, use the `Window` class.
