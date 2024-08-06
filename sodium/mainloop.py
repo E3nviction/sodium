@@ -6,13 +6,6 @@ from . import theme
 from . import Window
 
 def mainloop(win, main, auto=False):
-    """
-    Starts the mainloop
-
-    :param win: window object
-    :param main: main function
-    :param auto: auto update
-    """
     if not auto:
         running = True
         while running:
@@ -35,10 +28,4 @@ def mainloop(win, main, auto=False):
     sodium.quit_window()
 
 def start(win, main):
-    """
-    Starts the mainloop
-
-    :param win: window object
-    :param main: main function
-    """
     mainloop(win, main, True)

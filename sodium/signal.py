@@ -1,3 +1,6 @@
+"""
+Signal module
+"""
 class Signal:
     def __init__(self, value=None):
         self._value = value

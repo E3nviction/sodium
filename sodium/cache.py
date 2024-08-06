@@ -1,1 +1,4 @@
+"""
+Cache module
+"""
 widgets = []
