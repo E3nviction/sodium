@@ -24,7 +24,7 @@ class Frame:
         label_horizontal="center",
         label_vertical="center",
         disabled=False,
-        children=[],
+        children=None,
         ):
         super().__init__()
         self.surface = surface
