@@ -24,6 +24,7 @@ class Frame:
         label_horizontal="center",
         label_vertical="center",
         disabled=False,
+        children=[],
         ):
         super().__init__()
         self.surface = surface
@@ -43,6 +44,8 @@ class Frame:
         self.id = common.widget_get_id()
         self.widget_id = 1
         self.name = ""
+
+        self.children = children
 
         cache.widgets.append(self.id)
 
@@ -145,20 +148,45 @@ class Frame:
     def toggle_disabled(self):
         self.disabled = not self.disabled
 
+    def add_child(self, child):
+        self.children.append(child)
+    def remove_child(self, child):
+        self.children.remove(child)
+    def get_childs(self):
+        return self.children
+    def set_childs(self, childs):
+        self.children = childs
+    def clear_childs(self):
+        self.children = []
+    
+    def get_id(self) -> int:
+        return self.id
+    def set_id(self, _id) -> None:
+        self.id = _id
+    
+    def get_name(self) -> str:
+        return self.name
+    def set_name(self, name) -> None:
+        self.name = name
+    
+    def update_childs_bounding_box(self):
+        for child in self.children:
+            if hasattr(child, "set_bounding_box"):
+                child.set_bounding_box(self.rect)
+    def update_childs(self):
+        for child in self.children:
+            child.update()
     def draw(self):
-        surface = self.surface
-        label_horizontal = self.label_horizontal
-        label_vertical = self.label_vertical
-        text = self.text
-        font = self.font
         if self.disabled:
-            pygame.draw.rect(surface, self.disabled_background, self.rect)
-            Label(surface, text, self.rect, self.disabled_color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
+            pygame.draw.rect(self.surface, self.disabled_background, self.rect)
+            Label(self.surface, self.text, self.rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         else:
-            pygame.draw.rect(surface, self.background, self.rect)
-            Label(surface, text, self.rect, self.color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
+            pygame.draw.rect(self.surface, self.background, self.rect)
+            Label(self.surface, self.text, self.rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
     def update(self):
         self.draw()
+        self.update_childs_bounding_box()
+        self.update_childs()
     def reload_theme(self):
         self.color = common.set_color("theme", "FOREGROUND")
         self.background = common.set_color("theme", "BACKGROUND_SECONDARY")
