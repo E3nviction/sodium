@@ -1,15 +1,14 @@
 """
 Frame widget module
 """
-from typing import Any
 import pygame
 from .. import constants, common
 from .label import Label
+from .. import cache
 
+
+# pylint: disable=missing-docstring
 class Frame:
-    """
-    A Frame widget.
-    """
     def __init__(
         self,
         surface,
@@ -26,23 +25,6 @@ class Frame:
         label_vertical="center",
         disabled=False,
         ):
-        """
-        Initializes the Frame
-
-        :param surface: Surface
-        :param text: str
-        :param rect: tuple
-        :param color: Color
-        :param background: Color
-        :param disabled_color: Color
-        :param disabled_background: Color
-        :param font: Font
-        :param font_family: str
-        :param font_size: int
-        :param label_horizontal: str [left, center, right]
-        :param label_vertical: str [top, center, bottom]
-        :param disabled: bool
-        """
         super().__init__()
         self.surface = surface
         self.text = text
@@ -58,248 +40,112 @@ class Frame:
         self.label_vertical = label_vertical
         self.disabled = disabled
 
+        self.id = common.widget_get_id()
+        self.widget_id = 1
+        self.name = ""
+
+        cache.widgets.append(self.id)
+
         if font is None:
             self.font = common.set_font(font_family, font_size)
 
-    def is_disabled(self):
-        """
-        Checks if the Frame is disabled
-
-        :return: bool
-        """
+    def is_disabled(self) -> bool:
         return self.disabled
 
-    def set_text(self, text):
-        """
-        Sets the Frame's text
-
-        :param text: str
-        """
+    def get_text(self) -> str:
+        return self.text
+    def set_text(self, text) -> None:
         self.text = text
 
-    def get_text(self):
-        """
-        Gets the Frame's text
-
-        :return: str
-        """
-        return self.text
-
-    def get_rect(self):
-        """
-        Gets the Frame's rect
-
-        :return: Rect
-        """
+    def get_rect(self) -> tuple:
         return self.rect
-
-    def get_width(self):
-        """
-        Gets the Frame's width
-
-        :return: int
-        """
-        return self.rect.width
-
-    def get_height(self):
-        """
-        Gets the Frame's height
-
-        :return: int
-        """
-        return self.rect.height
-
-    def set_rect(self, rect):
-        """
-        Sets the Frame's rect
-
-        :param rect: Rect
-        """
+    def set_rect(self, rect) -> None:
         self.rect = constants.Rect(rect)
-    
-    def get_size(self):
-        """
-        Gets the Frame's size
 
-        :return: tuple
-        """
+    def get_width(self) -> int:
+        return self.rect.width
+    def set_width(self, width) -> None:
+        self.rect.width = width
+
+    def get_height(self) -> int:
+        return self.rect.height
+    def set_height(self, height) -> None:
+        self.rect.height = height
+
+    def get_size(self) -> tuple:
         return self.rect.size
-    
-    def set_size(self, size):
-        """
-        Sets the Frame's size
-
-        :param size: tuple
-        """
+    def set_size(self, size) -> None:
         self.rect.size = size
-    
-    def get_x(self):
-        """
-        Gets the Frame's x
 
-        :return: int
-        """
+    def get_x(self) -> int:
         return self.rect.x
-    
-    def get_y(self):
-        """
-        Gets the Frame's y
-
-        :return: int
-        """
-        return self.rect.y
-
-    def set_x(self, x):
-        """
-        Sets the Frame's x
-
-        :param x: int
-        """
+    def set_x(self, x) -> None:
         self.rect.x = x
 
-    def set_y(self, y):
-        """
-        Sets the Frame's y
-
-        :param y: int
-        """
+    def get_y(self) -> int:
+        return self.rect.y
+    def set_y(self, y) -> None:
         self.rect.y = y
-    
-    def get_position(self):
-        """
-        Gets the Frame's position
 
-        :return: tuple
-        """
+    def get_position(self) -> tuple:
         return self.rect.topleft
-
-    def set_position(self, position):
-        """
-        Sets the Frame's position
-
-        :param position: tuple
-        """
+    def set_position(self, position) -> None:
         self.rect.topleft = position
 
-    def set_color(self, color):
-        """
-        Sets the Frame's color
-
-        :param color: Color
-        """
+    def get_color(self) -> str:
+        return self.color
+    def set_color(self, color) -> None:
         self.color = common.set_color(color, "FOREGROUND")
 
-    def set_background(self, color):
-        """
-        Sets the Frame's background
-
-        :param color: Color
-        """
+    def get_background(self) -> str:
+        return self.background
+    def set_background(self, color) -> None:
         self.background = common.set_color(color, "ACCENT")
 
-    def set_disabled(self, disabled):
-        """
-        Sets the Frame's disabled
-
-        :param disabled: bool
-        """
-        self.disabled = disabled
-    
-    def get_disabled(self):
-        """
-        Gets the Frame's disabled status
-
-        :return: bool
-        """
+    def get_disabled(self) -> bool:
         return self.disabled
+    def set_disabled(self, disabled) -> None:
+        self.disabled = disabled
 
-    def set_disabled_color(self, color):
-        """
-        Sets the Frame's disabled color
-
-        :param color: Color
-        """
+    def get_disabled_color(self) -> str:
+        return self.disabled_color
+    def set_disabled_color(self, color) -> None:
         self.disabled_color = common.set_color(color, "FOREGROUND_DISABLED")
 
-    def set_disabled_background(self, color):
-        """
-        Sets the Frame's disabled background
-
-        :param color: Color
-        """
+    def get_disabled_background(self) -> str:
+        return self.disabled_background
+    def set_disabled_background(self, color) -> None:
         self.disabled_background = common.set_color(color, "ACCENT_DISABLED")
 
-    def set_font(self, font_family, font_size):
-        """
-        Sets the Frame's font
+    def get_font_family(self) -> str:
+        return self.font_family
+    def set_font_family(self, font_family) -> None:
+        self.font_family = font_family
 
-        :param font: str
-        :param font_size: int
-        """
-        self.font = common.set_font(font_family, font_size)
-
-    def set_label_horizontal(self, horizontal):
-        """
-        Sets the Frame's label horizontal
-
-        :param horizontal: str
-        """
+    def set_label_horizontal(self, horizontal) -> None:
         self.label_horizontal = horizontal
-
-    def set_label_vertical(self, vertical):
-        """
-        Sets the Frame's label vertical
-
-        :param vertical: str
-        """
-        self.label_vertical = vertical
-
-    def get_label_horizontal(self):
-        """
-        Gets the Frame's label horizontal
-
-        :return: str
-        """
+    def get_label_horizontal(self) -> str:
         return self.label_horizontal
 
-    def get_label_vertical(self):
-        """
-        Gets the Frame's label vertical
-
-        :return: str
-        """
+    def set_label_vertical(self, vertical) -> None:
+        self.label_vertical = vertical
+    def get_label_vertical(self) -> str:
         return self.label_vertical
 
     def get_font(self):
-        """
-        Gets the Frame's font
-
-        :return: str
-        """
         return self.font
-    
-    def enable(self):
-        """
-        Enables the Frame
-        """
-        self.disabled = False
+    def set_font(self, font_family, font_size) -> None:
+        self.font = common.set_font(font_family, font_size)
 
+    def enable(self):
+        self.disabled = False
     def disable(self):
-        """
-        Disables the Frame
-        """
         self.disabled = True
 
     def toggle_disabled(self):
-        """
-        Toggles the Frame's disabled
-        """
         self.disabled = not self.disabled
 
     def draw(self):
-        """
-        Draws the Frame
-        """
         surface = self.surface
         label_horizontal = self.label_horizontal
         label_vertical = self.label_vertical
@@ -311,13 +157,8 @@ class Frame:
         else:
             pygame.draw.rect(surface, self.background, self.rect)
             Label(surface, text, self.rect, self.color, font, align_horizontal=label_horizontal, align_vertical=label_vertical).draw()
-
     def update(self):
-        """
-        Updates the Frame
-        """
         self.draw()
-    
     def reload_theme(self):
         self.color = common.set_color("theme", "FOREGROUND")
         self.background = common.set_color("theme", "BACKGROUND_SECONDARY")
