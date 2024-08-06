@@ -1,5 +1,5 @@
 """
-Button widget module
+FreeButton widget module
 """
 import pygame
 from .. import constants, common
@@ -8,13 +8,12 @@ from .. import signal as signal_module
 from .. import cache
 
 # pylint: disable=missing-docstring
-class Button:
+class FreeButton:
     def __init__(
         self,
         surface,
         text,
         rect=(0, 0, 0, 0),
-        bounding_box=(0, 0, 0, 0),
         color="theme",
         background="theme",
         hover_color="theme",
@@ -37,7 +36,6 @@ class Button:
         self.surface = surface
         self.text = text
         self.rect = constants.Rect(rect)
-        self.bounding_box = constants.Rect(bounding_box)
         self.color = common.set_color(color, "ACCENT_FOREGROUND")
         self.background = common.set_color(background, "ACCENT")
         self.hover_color = common.set_color(hover_color, "ACCENT_FOREGROUND")
@@ -190,11 +188,6 @@ class Button:
     def set_font(self, font_family, font_size) -> None:
         self.font = common.set_font(font_family, font_size)
 
-    def get_bounding_box(self) -> tuple:
-        return self.bounding_box
-    def set_bounding_box(self, rect) -> None:
-        self.bounding_box = constants.Rect(rect)
-
     def enable(self) -> None:
         self.disabled = False
     def disable(self) -> None:
@@ -212,7 +205,7 @@ class Button:
         return self.id
     def set_id(self, _id) -> None:
         self.id = _id
-
+    
     def get_name(self) -> str:
         return self.name
     def set_name(self, name) -> None:
@@ -253,19 +246,18 @@ class Button:
             self.button_state = None
             return None
     def draw(self) -> None:
-        rect = self.rect.clip(self.bounding_box)
         if pygame.mouse.get_pressed()[self.mouse_button] and self.is_locked() and not self.is_disabled():
-            pygame.draw.rect(self.surface, self.active_background, rect)
-            Label(self.surface, self.text, rect, self.active_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            pygame.draw.rect(self.surface, self.active_background, self.rect)
+            Label(self.surface, self.text, self.rect, self.active_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         elif self.is_touching_mouse() and not self.is_disabled():
-            pygame.draw.rect(self.surface, self.hover_background, rect)
-            Label(self.surface, self.text, rect, self.hover_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            pygame.draw.rect(self.surface, self.hover_background, self.rect)
+            Label(self.surface, self.text, self.rect, self.hover_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         elif self.is_disabled():
-            pygame.draw.rect(self.surface, self.disabled_background, rect)
-            Label(self.surface, self.text, rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            pygame.draw.rect(self.surface, self.disabled_background, self.rect)
+            Label(self.surface, self.text, self.rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         else:
-            pygame.draw.rect(self.surface, self.background, rect)
-            Label(self.surface, self.text, rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            pygame.draw.rect(self.surface, self.background, self.rect)
+            Label(self.surface, self.text, self.rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
     def update(self) -> None:
         self.check_click()
         self.draw()
