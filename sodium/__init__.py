@@ -28,6 +28,7 @@ from .event import *
 from .theme import *
 from .mainloop import *
 from .require import *
+from .signal import *
 
 __all__ = [
     "settings",
@@ -43,7 +44,8 @@ __all__ = [
     "quit_window",
     "require",
     "load_theme",
-    "get_theme"
+    "get_theme",
+    "Signal",
 ]
 
 if not hide_friendly_messages:
