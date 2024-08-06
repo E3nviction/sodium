@@ -112,6 +112,16 @@ class FreeLabel:
         self.set_align_horizontal(align_horizontal)
         self.set_align_vertical(align_vertical)
 
+    def get_id(self) -> int:
+        return self.id
+    def set_id(self, _id) -> None:
+        self.id = _id
+
+    def get_name(self) -> str:
+        return self.name
+    def set_name(self, name) -> None:
+        self.name = name
+
     def draw(self) -> None:
         if self.font is None:
             self.font = common.set_font(self.font_family, self.font_size)
