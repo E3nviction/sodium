@@ -14,3 +14,11 @@ def init():
     Initializes the window
     """
     _init()
+
+    with open("cache.sdc", "w", encoding="utf-8") as file:
+        file.seek(0)
+        file.truncate()
+        file.write("")
+    file.close()
+
+    return True
