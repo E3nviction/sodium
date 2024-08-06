@@ -4,8 +4,10 @@ Button widget module
 import pygame
 from .. import constants, common
 from .label import Label
+from .. import signal as signal_module
+from .. import cache
 
-  # pylint: disable=missing-docstring
+# pylint: disable=missing-docstring
 class Button:
     def __init__(
         self,
@@ -52,8 +54,13 @@ class Button:
         self.on_click_args = on_click_args
         self.mouse_button = mouse_button
 
+        self.id = common.widget_get_id()
+        self.widget_id = 0
+        self.name = ""
         self.locked = False
         self.button_state = None
+
+        cache.widgets.append(self.id)
 
         if font is None:
             self.font = common.set_font(font_family, font_size)
@@ -211,29 +218,31 @@ class Button:
     def check_click(self) -> bool:
         if self.is_active() and not self.is_locked():
             self.locked = True
-            if self.on_click_func:
-                if self.on_click_args:
-                    self.on_click_func(*self.on_click_args)
-                else:
-                    self.on_click_func()
             self.button_state = True
+            signal_module.widget_pressed.set_value(self.id)
             return True
-        if not self.is_active() and self.is_locked():
+        if not pygame.mouse.get_pressed()[self.mouse_button] and self.is_locked():
+            if self.is_touching_mouse() and signal_module.widget_pressed.get_value() == self.id:
+                if self.on_click_func:
+                    if self.on_click_args:
+                        self.on_click_func(*self.on_click_args)
+                    else:
+                        self.on_click_func()
+                signal_module.widget_pressed.set_value(0)
             self.locked = False
             self.button_state = False
             return False
         if not self.is_active():
-            self.locked = False
             self.button_state = None
             return None
     def draw(self) -> None:
-        if self.is_active() and not self.is_disabled():
+        if pygame.mouse.get_pressed()[self.mouse_button] and self.is_locked() and not self.is_disabled():
             pygame.draw.rect(self.surface, self.active_background, self.rect)
             Label(self.surface, self.text, self.rect, self.active_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
-        elif self.is_touching_mouse():
+        elif self.is_touching_mouse() and not self.is_disabled():
             pygame.draw.rect(self.surface, self.hover_background, self.rect)
             Label(self.surface, self.text, self.rect, self.hover_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
-        elif self.disabled:
+        elif self.is_disabled():
             pygame.draw.rect(self.surface, self.disabled_background, self.rect)
             Label(self.surface, self.text, self.rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         else:
