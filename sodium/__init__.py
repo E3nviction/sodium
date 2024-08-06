@@ -15,10 +15,11 @@ warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*avx2.*")
 import pygame
 sys.stdout = sys.__stdout__
 
-__version__ = "0.0.9"
+__version__ = "0.0.9a"
 VERSION_0_0_7 = "0.0.7"
 VERSION_0_0_8 = "0.0.8"
 VERSION_0_0_9 = "0.0.9"
+VERSION_0_0_9A = "0.0.9a"
 VERSION_LATEST = "latest"
 
 from .settings import *
