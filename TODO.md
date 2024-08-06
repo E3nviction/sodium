@@ -4,8 +4,6 @@ Before 1.0.0
  - [ ] add frame to documentation
  - [ ] implement transparency
  - [ ] mouse can only interact with the most front widget
- - [ ] add frame.add_widget method
- - [ ] add child system
  - [ ] add cache file system
  - [ ] add .ui extension for ui files
  - [ ] add better styling
