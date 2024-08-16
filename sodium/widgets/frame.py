@@ -1,6 +1,3 @@
-"""
-Frame widget module
-"""
 import pygame
 from .. import constants, common
 from .label import Label
@@ -11,8 +8,8 @@ from .. import cache
 class Frame:
     def __init__(
         self,
-        surface,
-        text,
+        surface="wiscreen",
+        label="",
         rect=(0, 0, 0, 0),
         color="theme",
         background="theme",
@@ -28,7 +25,9 @@ class Frame:
         ):
         super().__init__()
         self.surface = surface
-        self.text = text
+        if surface == "wiscreen":
+            self.surface = cache.screen
+        self.label = label
         self.rect = constants.Rect(rect)
         self.color = common.set_color(color, "FOREGROUND")
         self.background = common.set_color(background, "BACKGROUND_SECONDARY")
@@ -55,10 +54,10 @@ class Frame:
     def is_disabled(self) -> bool:
         return self.disabled
 
-    def get_text(self) -> str:
-        return self.text
-    def set_text(self, text) -> None:
-        self.text = text
+    def get_label(self) -> str:
+        return self.label
+    def set_label(self, label) -> None:
+        self.label = label
 
     def get_rect(self) -> tuple:
         return self.rect
@@ -179,10 +178,10 @@ class Frame:
     def draw(self):
         if self.disabled:
             pygame.draw.rect(self.surface, self.disabled_background, self.rect)
-            Label(self.surface, self.text, self.rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            Label(self.surface, self.label, self.rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         else:
             pygame.draw.rect(self.surface, self.background, self.rect)
-            Label(self.surface, self.text, self.rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            Label(self.surface, self.label, self.rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
     def update(self):
         self.draw()
         self.update_childs_bounding_box()
