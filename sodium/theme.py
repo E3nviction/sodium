@@ -1,6 +1,3 @@
-"""
-Theme module
-"""
 import json
 
 theme_colors = {}
@@ -11,12 +8,6 @@ def __init__():
         theme_colors = json.load(file)
 
 def load_theme(theme):
-    """
-    Loads the theme
-
-    :param theme: str
-    :return: dict
-    """
     global theme_colors  # pylint: disable=global-statement
     if theme == "dark blue":
         theme = "sodium/themes/dark_blue.json"
@@ -32,11 +23,6 @@ def load_theme(theme):
     return theme_colors
 
 def get_theme():
-    """
-    Gets the theme
-
-    :return: dict
-    """
     return theme_colors
 
 
