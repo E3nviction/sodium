@@ -1,4 +1,2 @@
-"""
-Cache module
-"""
 widgets = []
+screen = None

@@ -1,6 +1,3 @@
-"""
-constants module
-"""
 import pygame
 
 

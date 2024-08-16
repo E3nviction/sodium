@@ -1,6 +1,3 @@
-"""
-common module
-"""
 import pygame
 from .constants import Color
 from . import theme
