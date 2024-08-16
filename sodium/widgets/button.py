@@ -1,6 +1,3 @@
-"""
-Button widget module
-"""
 import pygame
 from .. import constants, common
 from .label import Label
@@ -11,8 +8,8 @@ from .. import cache
 class Button:
     def __init__(
         self,
-        surface,
-        text,
+        surface="wiscreen",
+        label="Button",
         rect=(0, 0, 0, 0),
         bounding_box=(0, 0, 0, 0),
         color="theme",
@@ -35,7 +32,9 @@ class Button:
         ):
         super().__init__()
         self.surface = surface
-        self.text = text
+        if surface == "wiscreen":
+            self.surface = cache.screen
+        self.label = label
         self.rect = constants.Rect(rect)
         self.bounding_box = constants.Rect(bounding_box)
         self.color = common.set_color(color, "ACCENT_FOREGROUND")
@@ -81,10 +80,10 @@ class Button:
     def set_on_click_func(self, func) -> None:
         self.on_click_func = func
 
-    def get_text(self) -> str:
-        return self.text
-    def set_text(self, text) -> None:
-        self.text = text
+    def get_label(self) -> str:
+        return self.label
+    def set_label(self, label) -> None:
+        self.label = label
 
     def get_on_click_args(self) -> tuple:
         return self.on_click_args
@@ -256,16 +255,16 @@ class Button:
         rect = self.rect.clip(self.bounding_box)
         if pygame.mouse.get_pressed()[self.mouse_button] and self.is_locked() and not self.is_disabled():
             pygame.draw.rect(self.surface, self.active_background, rect)
-            Label(self.surface, self.text, rect, self.active_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            Label(self.surface, self.label, rect, self.active_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         elif self.is_touching_mouse() and not self.is_disabled():
             pygame.draw.rect(self.surface, self.hover_background, rect)
-            Label(self.surface, self.text, rect, self.hover_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            Label(self.surface, self.label, rect, self.hover_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         elif self.is_disabled():
             pygame.draw.rect(self.surface, self.disabled_background, rect)
-            Label(self.surface, self.text, rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            Label(self.surface, self.label, rect, self.disabled_color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
         else:
             pygame.draw.rect(self.surface, self.background, rect)
-            Label(self.surface, self.text, rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
+            Label(self.surface, self.label, rect, self.color, self.font, align_horizontal=self.label_horizontal, align_vertical=self.label_vertical).draw()
     def update(self) -> None:
         self.check_click()
         self.draw()
