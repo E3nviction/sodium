@@ -29,7 +29,7 @@ from .constants import *
 from .builtins import *
 from .event import *
 from .theme import *
-from .mainloop import *
+from .main import *
 from .require import *
 from .signal import *
 
@@ -42,7 +42,10 @@ __all__ = [
     "builtins",
     "event",
     "theme",
+    "main",
     "mainloop",
+    "start",
+    "bg_fill",
     "init",
     "quit_window",
     "require",
