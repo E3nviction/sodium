@@ -1,6 +1,3 @@
-"""
-FreeLabel widget module
-"""
 from .. import constants, common
 from .. import cache
 
@@ -9,8 +6,8 @@ from .. import cache
 class FreeLabel:
     def __init__(
         self,
-        surface,
-        text,
+        surface="wiscreen",
+        label="FreeLabel",
         rect=(0, 0, 0, 0),
         color="theme",
         font=None,
@@ -21,7 +18,9 @@ class FreeLabel:
         ):
         super().__init__()
         self.surface = surface
-        self.text = text
+        if surface == "wiscreen":
+            self.surface = cache.screen
+        self.label = label
         self.rect = constants.Rect(rect)
         self.color = common.set_color(color, "FOREGROUND")
         self.font = font
@@ -39,22 +38,22 @@ class FreeLabel:
         if font is None:
             self.font = common.set_font(font_family, font_size)
 
-    def get_text(self):
-        return self.text
-    def set_text(self, text):
-        self.text = text
+    def get_label(self):
+        return self.label
+    def set_label(self, label):
+        self.label = label
 
     def get_rect(self):
         return self.rect
     def set_rect(self, rect):
         self.rect = constants.Rect(rect)
 
-    def get_text_size(self):
-        return self.font.size(self.text)
-    def get_text_width(self):
-        return self.get_text_size()[0]
-    def get_text_height(self):
-        return self.get_text_size()[1]
+    def get_label_size(self):
+        return self.font.size(self.label)
+    def get_label_width(self):
+        return self.get_label_size()[0]
+    def get_label_height(self):
+        return self.get_label_size()[1]
 
     def get_x(self):
         return self.rect.x
@@ -129,9 +128,9 @@ class FreeLabel:
         new_rect = [0, 0, 0, 0]
 
         if self.align_horizontal == "center":
-            new_rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.text)[0] / 2
+            new_rect[0] = self.rect.w / 2 + self.rect.x - self.font.size(self.label)[0] / 2
         elif self.align_horizontal == "right":
-            new_rect[0] = self.rect.w + self.rect.x - self.font.size(self.text)[0]
+            new_rect[0] = self.rect.w + self.rect.x - self.font.size(self.label)[0]
         elif self.align_horizontal == "left":
             new_rect[0] = self.rect.x
         else:
@@ -145,6 +144,6 @@ class FreeLabel:
         else:
             raise ValueError(f"align_y must be 'top', 'bottom', or 'center' and not '{self.align_vertical}'")
         
-        self.surface.blit(self.font.render(self.text, True, self.color), new_rect)
+        self.surface.blit(self.font.render(self.label, True, self.color), new_rect)
     def update(self) -> None:
         self.draw()
