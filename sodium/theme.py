@@ -9,6 +9,13 @@ def __init__():
 
 def load_theme(theme):
     global theme_colors  # pylint: disable=global-statement
+    with open(theme, encoding="utf-8") as file:
+        theme_colors = json.load(file)
+
+    return theme_colors
+
+def load_preset(theme):
+    global theme_colors  # pylint: disable=global-statement
     if theme == "dark blue":
         theme = "sodium/themes/dark_blue.json"
     elif theme == "light blue":
@@ -17,10 +24,14 @@ def load_theme(theme):
         theme = "sodium/themes/light_blue.json"
     elif theme == "dark":
         theme = "sodium/themes/dark_blue.json"
+    elif theme == "dark oled":
+        theme = "sodium/themes/dark_oled.json"
+    elif theme == "default":
+        theme = "sodium/themes/dark_blue.json"
+    else:
+        theme = "sodium/themes/dark_blue.json"
     with open(theme, encoding="utf-8") as file:
         theme_colors = json.load(file)
-
-    return theme_colors
 
 def get_theme():
     return theme_colors

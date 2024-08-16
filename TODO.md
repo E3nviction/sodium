@@ -1,4 +1,5 @@
 Before 1.0.0
+ - [x] add Oled dark theme
  - [ ] add checkbox, radio button, list, image drawing
  - [ ] add rounded corners, antialiasing
  - [ ] add frame to documentation
